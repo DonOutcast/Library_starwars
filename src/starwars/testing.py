@@ -1,8 +1,11 @@
-import requests
-from bs4 import BeautifulSoup
-from lxml import etree
-from exceptions import ResourceDoesNotExists
-
+try:
+    import requests
+    from bs4 import BeautifulSoup
+    from lxml import etree
+    from exceptions import ResourceDoesNotExists
+    import sys
+except (Exception,) as e:
+    print(sys.exc_info())
 HEADERS = {
     "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"}
 url = "https://www.starwars.com/databank/luke-skywalker"
