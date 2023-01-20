@@ -67,9 +67,21 @@ def save_image(person_name: str, path_to_image) -> bool:
 import json
 import requests
 from settings import Config
+import telebot
 
 
 class StarWars:
+    """
+    Class for all names and ids in world Star Wars.
+        Usage:
+
+    .. code-block:: python3
+        :caption: Creating instance of StarWars
+
+        from star_wars import star_wars
+        jedi = StarWars(
+        # and use jedi methods.
+    """
 
     def __init__(self):
         self.__url_people = Config.get_url_api() + Config.get_people()
@@ -80,9 +92,11 @@ class StarWars:
         self.__url_starships = Config.get_url_api() + Config.get_starships()
 
     @staticmethod
-    def get_response(url_path: str) -> dict[str, int]:
+    def get_response(url_path: str, name_key: str) -> dict[str, int]:
         """ Return a response to url
          :param: url_path str
+         :type: str
+         :param: name_key this is a key of value
          :type: str
          :returns: Response to url in a dictionary
          :type: dict[str, int]
@@ -91,10 +105,12 @@ class StarWars:
         names = {}
         while running:
             my_response = requests.get(url_path)
+            if my_response.status_code != 200:
+                raise ResourceDoesNotExists
             json_data = json.loads(my_response.content)
             for resource in json_data["results"]:
-                names[resource["name"]] = resource["url"].split("/")[-2]
-            if bool(json_data["next"]):
+                names[resource.get(name_key)] = resource.get("url").split("/")[-2]
+            if bool(json_data.get("next")):
                 url_path = json_data["next"]
             else:
                 running = False
@@ -105,44 +121,44 @@ class StarWars:
          :returns: Response to url in a dictionary
          :type: dict[str, int]
         """
-        return self.get_response(self.__url_people)
+        return self.get_response(self.__url_people, name_key="name")
 
     def get_planets_names(self):
         """ Return all names and ids of planets
          :returns: Response to url in a dictionary
          :type: dict[str, int]
         """
-        return self.get_response(self.__url_planets)
+        return self.get_response(self.__url_planets, name_key="name")
 
     def get_films_names(self):
         """ Return all names and ids of films
          :returns: Response to url in a dictionary
          :type: dict[str, int]
         """
-        return self.get_response(self.__url_films)
+        return self.get_response(self.__url_films, name_key="title")
 
     def get_species_names(self):
         """ Return all names and ids of species
          :returns: Response to url in a dictionary
          :type: dict[str, int]
         """
-        return self.get_response(self.__url_species)
+        return self.get_response(self.__url_species, name_key="name")
 
     def get_vehicles_names(self):
         """ Return all names and ids of vehicles
          :returns: Response to url in a dictionary
          :type: dict[str, int]
         """
-        return self.get_response(self.__url_vehicles)
+        return self.get_response(self.__url_vehicles, name_key="name")
 
     def get_starships_names(self):
         """ Return all names and ids of starships
          :returns: Response to url in a dictionary
          :type: dict[str, int]
         """
-        return self.get_response(self.__url_starships)
+        return self.get_response(self.__url_starships, name_key="name")
 
 
 if __name__ == "__main__":
     temp = StarWars()
-
+    print(temp.get_films_names())
