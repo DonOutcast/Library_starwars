@@ -40,26 +40,109 @@ def save_image(person_name: str, path_to_image) -> bool:
         return True
 
 
+# if __name__ == "__main__":
+#     path = get_url_image("sss", soup)
+#     print(save_image("siste", path))
+# print(soup.prettify())
+# weapons = []
+# temp = soup.find_all("div", class_="category")
+# # print(temp[6].text)
+# for i in temp:
+#     if "Weapons" in i.text:
+#         weapons = i.find_all("div", class_="property-name")
+# if weapons:
+#     print(weapons)
+
+# print(soup.select("#ref-1-6 > div > div > div:nth-child(7)"))
+# status = soup.find_all("div", class_="stats-container")
+# print(status)
+# dom = etree.HTML(str(status))
+# print(dom.xpath('//*[@class="category"][6]/ul/li/a/div/text()'))
+
+# images = soup.select("img")[2].attrs
+# dom = etree.HTML(str(soup))
+# with open("image.png", 'wb') as f:
+#     f.write(requests.get(images.get("data-src")).content)
+
+import json
+import requests
+from settings import Config
+
+
+class StarWars:
+
+    def __init__(self):
+        self.__url_people = Config.get_url_api() + Config.get_people()
+        self.__url_planets = Config.get_url_api() + Config.get_planets()
+        self.__url_films = Config.get_url_api() + Config.get_films()
+        self.__url_species = Config.get_url_api() + Config.get_species()
+        self.__url_vehicles = Config.get_url_api() + Config.get_vehicles()
+        self.__url_starships = Config.get_url_api() + Config.get_starships()
+
+    @staticmethod
+    def get_response(url_path: str) -> dict[str, int]:
+        """ Return a response to url
+         :param: url_path str
+         :type: str
+         :returns: Response to url in a dictionary
+         :type: dict[str, int]
+        """
+        running = True
+        names = {}
+        while running:
+            my_response = requests.get(url_path)
+            json_data = json.loads(my_response.content)
+            for resource in json_data["results"]:
+                names[resource["name"]] = resource["url"].split("/")[-2]
+            if bool(json_data["next"]):
+                url_path = json_data["next"]
+            else:
+                running = False
+        return names
+
+    def get_people_names(self):
+        """ Return all names and ids of people
+         :returns: Response to url in a dictionary
+         :type: dict[str, int]
+        """
+        return self.get_response(self.__url_people)
+
+    def get_planets_names(self):
+        """ Return all names and ids of planets
+         :returns: Response to url in a dictionary
+         :type: dict[str, int]
+        """
+        return self.get_response(self.__url_planets)
+
+    def get_films_names(self):
+        """ Return all names and ids of films
+         :returns: Response to url in a dictionary
+         :type: dict[str, int]
+        """
+        return self.get_response(self.__url_films)
+
+    def get_species_names(self):
+        """ Return all names and ids of species
+         :returns: Response to url in a dictionary
+         :type: dict[str, int]
+        """
+        return self.get_response(self.__url_species)
+
+    def get_vehicles_names(self):
+        """ Return all names and ids of vehicles
+         :returns: Response to url in a dictionary
+         :type: dict[str, int]
+        """
+        return self.get_response(self.__url_vehicles)
+
+    def get_starships_names(self):
+        """ Return all names and ids of starships
+         :returns: Response to url in a dictionary
+         :type: dict[str, int]
+        """
+        return self.get_response(self.__url_starships)
+
+
 if __name__ == "__main__":
-    path = get_url_image("sss", soup)
-    print(save_image("siste", path))
-    # print(soup.prettify())
-    # weapons = []
-    # temp = soup.find_all("div", class_="category")
-    # # print(temp[6].text)
-    # for i in temp:
-    #     if "Weapons" in i.text:
-    #         weapons = i.find_all("div", class_="property-name")
-    # if weapons:
-    #     print(weapons)
+    temp = StarWars()
 
-    # print(soup.select("#ref-1-6 > div > div > div:nth-child(7)"))
-    # status = soup.find_all("div", class_="stats-container")
-    # print(status)
-    # dom = etree.HTML(str(status))
-    # print(dom.xpath('//*[@class="category"][6]/ul/li/a/div/text()'))
-
-    # images = soup.select("img")[2].attrs
-    # dom = etree.HTML(str(soup))
-    # with open("image.png", 'wb') as f:
-    #     f.write(requests.get(images.get("data-src")).content)

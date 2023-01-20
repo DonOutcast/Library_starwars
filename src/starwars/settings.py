@@ -10,7 +10,7 @@ except (Exception,):
 
 class Config(BaseModel):
     """The class for base settings of parser"""
-    __base_url_api: Optional[str] = "https://swapi.dev/api"
+    __base_url_api: Optional[str] = "https://swapi.dev/api/"
     __base_url_star_wars: Optional[str] = "https://www.starwars.com/databank/"
     __people: Optional[str] = "people"
     __planets: Optional[str] = "planets"
@@ -19,61 +19,69 @@ class Config(BaseModel):
     __films: Optional[str] = "films"
     __species: Optional[str] = "species"
 
-    def get_url_api(self) -> str:
+    @staticmethod
+    def get_url_api() -> str:
         """Getting a base url star_wars
         :returns: Url
         :rtype: str
         """
-        return self.__base_url_api
+        return Config.__base_url_api
 
-    def get_url_star_wars(self) -> str:
+    @staticmethod
+    def get_url_star_wars() -> str:
         """Getting a base url star_wars
         :returns: Url
         :rtype: str
         """
-        return self.__base_url_star_wars
+        return Config.__base_url_star_wars
 
-    def get_people(self) -> str:
+    @staticmethod
+    def get_people() -> str:
         """Getting a base url star_wars
         :returns: People
         :rtype: str
         """
-        return self.__people
+        return Config.__people
 
-    def get_planets(self) -> str:
+    @staticmethod
+    def get_planets() -> str:
         """Getting a base url star_wars
         :returns: Planets
         :rtype: str
         """
-        return self.__planets
+        return Config.__planets
 
-    def get_starships(self) -> str:
+    @staticmethod
+    def get_starships() -> str:
         """Getting a base url star_wars
         :returns: Starships
         :rtype: str
         """
-        return self.__starships
+        return Config.__starships
 
-    def get_vehicles(self) -> str:
+    @staticmethod
+    def get_vehicles() -> str:
         """Getting a base url star_wars
         :returns: Vehicles
         :rtype: str
         """
-        return self.__vehicles
+        return Config.__vehicles
 
-    def get_films(self) -> str:
+    @staticmethod
+    def get_films() -> str:
         """Getting a base url star_wars
         :returns: Films
         :rtype: str
         """
-        return self.__films
+        return Config.__films
 
-    def get_species(self) -> str:
+    @staticmethod
+    def get_species() -> str:
         """Getting a base url star_wars
         :returns: species
         :rtype: str
         """
-        return self.__species
+        return Config.__species
 
     def __str__(self):
         return f"In This class all variables to parse "

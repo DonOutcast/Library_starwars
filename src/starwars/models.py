@@ -1,3 +1,5 @@
+import requests
+
 try:
     import sys
     import time
@@ -10,6 +12,7 @@ except (Exception,):
 
 class BaseModel:
     """The class convert your byte string to json """
+
     def __init__(self, raw_data: bytes) -> None:
         """The base constructor add to all keys and values to attribute of class
         :param: raw_data bytes
@@ -18,8 +21,9 @@ class BaseModel:
         :type: None
         """
         json_data = json.loads(raw_data)
+        setattr(self, "json", json_data)
         for key, value in json_data.items():
-            print(key, value)
+            # print(key, value)
             setattr(self, key, value)
 
 
@@ -53,40 +57,6 @@ class StarshipQuerySet(BaseQuerySet):
         return "StarshipQuerySet - {0}".format(str(len(self.items)))
 
 
-class Starship(BaseModel):
-
-    def __init__(self, raw_data):
-        super(Starship, self).__init__(raw_data)
-
-    def __repr__(self):
-        return '<Starship - {0}>'.format(self.name)
-
-
-
-
-    # def get_films(self):
-    # return FilmQuerySet(self.films)
-
-    # def get_pilots(self):
-    # return PeopleQuerySet(self.pilots)
-
-def get_all(resource):
-    ''' Return all of a single resource '''
-    QUERYSETS = {
-        # conf.get_people(): PeopleQuerySet,
-        # conf.get_planets(): PlanetQuerySet,
-        conf.get_starships(): StarshipQuerySet,
-        # conf.get_vehicles(): VehicleQuerySet,
-        # conf.get_species(): SpeciesQuerySet,
-        # conf.get_films(): FilmQuerySet
-    }
-    urls = all_resource_urls(
-        "{0}/{1}/".format(conf.get_url_api(), resource)
-    )
-
-    return QUERYSETS[resource](urls)
-
-
 def _get(id, type, conf):
     ''' Return a single person '''
     result = query("{0}/{1}/{2}/".format(
@@ -98,14 +68,74 @@ def _get(id, type, conf):
 
 
 def get_starship(starship_id, conf):
-    ''' Return a single starship '''
+    """ Return a single starship """
     result = _get(starship_id, conf.get_starships(), conf)
-    print(Starship(result.content))
-    exit()
     return Starship(result.content)
 
 
+class Starship(BaseModel):
+
+    def __init__(self, raw_data):
+        super(Starship, self).__init__(raw_data)
+
+    def get_json(self):
+        """The function is a return json"""
+        return self.json
+
+    def __repr__(self):
+        return '<Starship - {0}>'.format(self.name)
+
+    # def get_films(self):
+    # return FilmQuerySet(self.films)
+
+    # def get_pilots(self):
+    # return PeopleQuerySet(self.pilots)
+
+
+def get_all(resource):
+    """ Return all of a single resource """
+    query_sets = {
+        # conf.get_people(): PeopleQuerySet,
+        # conf.get_planets(): PlanetQuerySet,
+        conf.get_starships(): StarshipQuerySet,
+        # conf.get_vehicles(): VehicleQuerySet,
+        # conf.get_species(): SpeciesQuerySet,
+        # conf.get_films(): FilmQuerySet
+    }
+    urls = all_resource_urls(
+        "{0}/{1}/".format(conf.get_url_api(), resource)
+    )
+
+    return query_sets[resource](urls)
+
+
 conf = Config()
-# print(get_starship(2, conf))
-ships = get_all("starships")
-print(ships)
+
+
+# temp = get_starship(2, conf)
+# print(temp.get_json())
+
+# ships = get_all("starships")
+# all_resource_urls("{0}/{1}/".format(conf.get_url_api(), "people"))
+
+
+# order = ships.iter()
+# print(type(ships))
+# def get_all_names_and_id(query):
+#     running = True
+#     names = {}
+#     while running:
+#         response = requests.get(query)
+#         json_data = json.loads(response.content)
+#         for resource in json_data["results"]:
+#             names[resource["name"]] = resource["url"].split("/")[-2]
+#         if bool(json_data["next"]):
+#             query = json_data["next"]
+#         else:
+#             running = False
+#     return names
+#
+#
+# print(get_all_names_and_id("{0}/{1}/".format(conf.get_url_api(), "people")))
+
+
