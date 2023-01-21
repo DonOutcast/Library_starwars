@@ -1,3 +1,5 @@
+import time
+
 try:
     import requests
     from bs4 import BeautifulSoup
@@ -121,6 +123,7 @@ class StarshipT(BaseRequest):
         # names = {}
         names = []
         url_path = Config.get_url_api() + Config.get_people()
+        # url_path = "https://starwars.fandom.com/wiki/"
         while running:
             my_response = requests.get(url_path)
             if my_response.status_code != 200:
@@ -136,7 +139,48 @@ class StarshipT(BaseRequest):
             else:
                 running = False
         return names
+    import  time
+    def get_descriptions(self, name: str):
+        url_path = "https://starwars.fandom.com/wiki/"
+        print(url_path + name.replace(" ", "_"))
+        response = requests.get(url_path + name.replace(" ", "_"))
+        print(response.status_code)
+        soup = BeautifulSoup(response.content, "lxml")
+        # soup_1 = soup.find("div", class_="page-content").find("div", {"id": "mw-content-text"})
+        # soup_1 = soup.find("div", class_="mw-parser-output").find_all("p")
+        soup_1 = soup.select("div.mw-parser-output > p")
 
+
+
+
+
+        count = 0
+        for p in soup_1:
+            if "<aside" in str(p):
+                # print(p.select_one("img.pi-image-thumbnail").get("src"))
+                # break
+                continue
+            else:
+                print(p)
+                # print(soup.select_one("img.thumbimage").get("data-src"))
+                break
+            count += 1
+
+        # dom = etree.HTML(str(soup_1))
+        # print(dom.xpath('//*[@class="category"][6]/ul/li/a/div/text()'))
+        # print(soup_1)
+        # print(soup_1.select("div > p:nth-child(6)"))
+        # print(soup_1.select("div > p:nth-child(odd)"))
+
+
+
+# def test_find():
+#     url_path = "https://starwars.fandom.com/wiki/"
+#     response = requests.get(url_path + name.replace(" ", "_"))
+#     print(response.status_code)
+#     soup = BeautifulSoup(response.content, "lxml")
+#     soup_1 = soup.find("div", class_="page-content").find("div", {"id": "mw-content-text"})
+#     print(soup_1.select("div > p:nth-child(6)"))
 
 # def all_pages(url_path):
 #     response = requests.get(url_path)
@@ -146,11 +190,11 @@ class StarshipT(BaseRequest):
 #         return all_pages(url_path)
 #     else:
 #         return json_data
-    # else:
-    #     url_path = json_data.get("next")
-    #     return all_pages(url_path)
+# else:
+#     url_path = json_data.get("next")
+#     return all_pages(url_path)
 
 
 if __name__ == "__main__":
-    print(all_pages("https://swapi.dev/api/people/"))
-
+    temp = StarshipT(2)
+    temp.get_descriptions(temp.get_starship_json().get("name"))
