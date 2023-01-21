@@ -64,6 +64,93 @@ def save_image(person_name: str, path_to_image) -> bool:
 # with open("image.png", 'wb') as f:
 #     f.write(requests.get(images.get("data-src")).content)
 
+import json
+from utils import query
+from settings import Config
 
 
+class BaseRequest:
+    """
+    The Class generate response with json
+    :param id_search: id of people or starships or planets or films or species or vehicles
+    :type id_search: :obj: `int`
+    :param url_path: the path from Config
+    :type url_path: :obj: `str`
+    :return: If status code request is 200 a json data or Exception
+    :type: :obj: `json`
+    """
+
+    def __init__(self, id_search: int, url_path: str) -> None:
+        response_json = query("{0}/{1}".format(url_path, id_search))
+        self.json_data = response_json.json()
+
+
+class StarshipT(BaseRequest):
+    """
+    Class for all names and ids in world Star Wars.
+        Usage:
+
+    .. code-block:: python3
+        :caption: Creating instance of StarWars
+
+        from star_wars import star_wars
+        jedi = StarWars(
+        # and use jedi methods.
+
+        :param id_starship: of a starship, should be obtained from StarWars
+        :type id_starship: :obj: `int`
+    """
+
+    def __init__(self, id_starship: int):
+        super(StarshipT, self).__init__(id_starship, Config.get_url_api() + Config.get_starships())
+        self.id = id_starship
+
+    def get_starship_json(self):
+        """ Return all names and ids of planets
+         :returns: Response to url in a dictionary
+         :type: dict[str, int]
+        """
+        return self.json_data
+
+    def get_pilots(self, name_key: str, search_id: int):
+        """ Return all pilots of the starship
+            :return:
+            :type:
+        """
+        running = True
+        # names = {}
+        names = []
+        url_path = Config.get_url_api() + Config.get_people()
+        while running:
+            my_response = requests.get(url_path)
+            if my_response.status_code != 200:
+                raise ResourceDoesNotExists
+            json_data = json.loads(my_response.content)
+            for resource in json_data["results"]:
+                # names[resource.get(name_key)] = resource.get("url").split("/")[-2]
+                for starship in resource.get(name_key):
+                    if starship.split("/")[-2] == str(search_id):
+                        names.append(resource.get("name"))
+            if bool(json_data.get("next")):
+                url_path = json_data["next"]
+            else:
+                running = False
+        return names
+
+
+# def all_pages(url_path):
+#     response = requests.get(url_path)
+#     json_data = response.json()
+#     if json_data.get("next"):
+#         url_path = json_data.get("next")
+#         return all_pages(url_path)
+#     else:
+#         return json_data
+    # else:
+    #     url_path = json_data.get("next")
+    #     return all_pages(url_path)
+
+
+if __name__ == "__main__":
+    print(all_pages("https://swapi.dev/api/people/"))
 

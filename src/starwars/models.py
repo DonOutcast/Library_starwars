@@ -154,44 +154,22 @@ def get_starship(starship_id, conf):
     return Starship(result.content)
 
 
-class BaseRequest:
 
-    def __init__(self, id_search, url_path):
-        super().__init__()  
-        response_json = query("{0}/{1}".format(url_path, id_search))
-        # self.json_data = response_json
-        self.id = id_search
-        # self.json_data = json.loads(raw_data)
+# class T:
+#     def __init__(self, name):
+#         name += '3'
+#         self.name = name
+#
+#
+# class A(T):
+#     def __init__(self, name):
+#         super(A, self).__init__(name)
+#         self.tem = name
+#
+#
+# a = A("Shamil")
+# print(a.tem)
 
-
-class StarshipT(Config, BaseRequest):
-    """
-    Class for all names and ids in world Star Wars.
-        Usage:
-
-    .. code-block:: python3
-        :caption: Creating instance of StarWars
-
-        from star_wars import star_wars
-        jedi = StarWars(
-        # and use jedi methods.
-
-        :param id_starship: of a starship, should be obtained from StarWars
-        :type id_starship: :obj: `int`
-    """
-
-    def __init__(self, id_starship: int):
-        # super(StarshipT, self).__init__(id_starship, Config.get_url_api() + Config.get_starships())
-        BaseRequest.__init__(self, id_starship, Config.get_url_api() + Config.get_starships())
-        # self.id = id_starship
-        self.json_data = BaseRequest.json_data
-    #
-    # def get_json_data(self):
-    #     return self.json_data
-
-print(StarshipT.__mro__)
-temp = StarshipT(2)
-print(temp)
 # READY
 # import json
 # import requests

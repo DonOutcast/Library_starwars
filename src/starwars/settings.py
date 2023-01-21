@@ -2,13 +2,14 @@ import sys
 
 try:
     import sys
-    from pydantic import BaseModel
+    from dataclasses import dataclass
     from typing import Optional
 except (Exception,):
     print(sys.exc_info())
 
 
-class Config(BaseModel):
+@dataclass
+class Config:
     """The class for base settings of parser"""
     __base_url_api: Optional[str] = "https://swapi.dev/api/"
     __base_url_star_wars: Optional[str] = "https://www.starwars.com/databank/"
