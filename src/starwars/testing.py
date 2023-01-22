@@ -69,6 +69,7 @@ def save_image(person_name: str, path_to_image) -> bool:
 import json
 from utils import query
 from settings import Config
+from accessify import protected
 
 
 class BaseRequest:
@@ -85,6 +86,14 @@ class BaseRequest:
     def __init__(self, id_search: int, url_path: str) -> None:
         response_json = query("{0}/{1}".format(url_path, id_search))
         self.json_data = response_json.json()
+
+    @protected
+    # @staticmethod
+    def _check_status_code(self, url_path):
+        status = requests.get(url_path)
+        if status != 200:
+            raise ResourceDoesNotExists
+        return status
 
 
 class StarshipT(BaseRequest):
@@ -105,7 +114,9 @@ class StarshipT(BaseRequest):
 
     def __init__(self, id_starship: int):
         super(StarshipT, self).__init__(id_starship, Config.get_url_api() + Config.get_starships())
+        self.image_path = None
         self.id = id_starship
+        self.url_starship = Config.get_url_starships()
 
     def get_starship_json(self):
         """ Return all names and ids of planets
@@ -139,39 +150,49 @@ class StarshipT(BaseRequest):
             else:
                 running = False
         return names
-    import  time
-    def get_descriptions(self, name: str):
-        url_path = "https://starwars.fandom.com/wiki/"
-        print(url_path + name.replace(" ", "_"))
-        response = requests.get(url_path + name.replace(" ", "_"))
-        print(response.status_code)
-        soup = BeautifulSoup(response.content, "lxml")
-        # soup_1 = soup.find("div", class_="page-content").find("div", {"id": "mw-content-text"})
-        # soup_1 = soup.find("div", class_="mw-parser-output").find_all("p")
-        soup_1 = soup.select("div.mw-parser-output > p")
 
-
-
-
-
-        count = 0
-        for p in soup_1:
+    def get_descriptions(self, name: str) -> str:
+        """ Return a descriptions of the ship
+            :return: `obj` str
+            :type:
+        """
+        my_response = requests.get(self.url_starship + name.replace(" ", "_"))
+        my_soup = BeautifulSoup(my_response.content, "lxml").select("div.mw-parser-output > p")
+        result = ""
+        for p in my_soup:
             if "<aside" in str(p):
-                # print(p.select_one("img.pi-image-thumbnail").get("src"))
-                # break
                 continue
             else:
-                print(p)
-                # print(soup.select_one("img.thumbimage").get("data-src"))
+                result = p.text
                 break
-            count += 1
+        return result.strip()
 
-        # dom = etree.HTML(str(soup_1))
-        # print(dom.xpath('//*[@class="category"][6]/ul/li/a/div/text()'))
-        # print(soup_1)
-        # print(soup_1.select("div > p:nth-child(6)"))
-        # print(soup_1.select("div > p:nth-child(odd)"))
+    def get_photo_ship(self, name: str) -> str:
+        """ Return a descriptions of the ship
+            :return: `obj` str
+            :type:
+        """
+        my_response = requests.get(self.url_starship + name.replace(" ", "_"))
+        my_soup = BeautifulSoup(my_response.content, "lxml").select("div.mw-parser-output > p")
+        result = ""
+        for p in my_soup:
+            if "<aside" in str(p):
+                result = p.select_one("img.pi-image-thumbnail").get("src")
+                break
+            else:
+                result = soup.select_one("img.thumbimage").get("data-src")
+                break
+        self.image_path = result
+        return result
 
+    def download_image(self, path: str) -> None:
+        """ The function save  image on your machine
+            :param path: Name and path to save
+            :type path: `obj` str
+        """
+        if BaseRequest._check_status_code(self.image_path) == 200:
+            with open("image.png", 'wb') as file:
+                file.write(requests.get(self.image_path).content)
 
 
 # def test_find():
@@ -197,4 +218,5 @@ class StarshipT(BaseRequest):
 
 if __name__ == "__main__":
     temp = StarshipT(2)
-    temp.get_descriptions(temp.get_starship_json().get("name"))
+    
+    temp.download_image("corvet")
