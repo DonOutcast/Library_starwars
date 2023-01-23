@@ -203,20 +203,27 @@ class StarshipT(BaseRequest):
 #     soup_1 = soup.find("div", class_="page-content").find("div", {"id": "mw-content-text"})
 #     print(soup_1.select("div > p:nth-child(6)"))
 
-# def all_pages(url_path):
-#     response = requests.get(url_path)
-#     json_data = response.json()
-#     if json_data.get("next"):
-#         url_path = json_data.get("next")
-#         return all_pages(url_path)
-#     else:
-#         return json_data
-# else:
-#     url_path = json_data.get("next")
-#     return all_pages(url_path)
 
+
+
+def all_pages(url_path, m_list):
+    response = requests.get(url_path)
+    json_data = response.json()
+    if json_data.get("next"):
+        url_path = json_data.get("next")
+        m_list.append(json_data)
+        return all_pages(url_path, m_list)
+
+def get_pilots(m_jsons, id_starship):
+    result = []
+    for json in id_starship:
+        if json.get("results")
 
 if __name__ == "__main__":
-    temp = StarshipT(2)
-    
-    temp.download_image("corvet")
+    my_list = []
+    all_pages("https://swapi.dev/api/people/", my_list)
+    for json in my_list:
+        print(json)
+    # temp = StarshipT(2)
+    # temp.download_image("corvet")
+
