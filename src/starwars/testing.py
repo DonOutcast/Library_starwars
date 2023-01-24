@@ -215,15 +215,25 @@ def all_pages(url_path, m_list):
         return all_pages(url_path, m_list)
 
 def get_pilots(m_jsons, id_starship):
-    result = []
     for json in id_starship:
-        if json.get("results")
+        if json.get("results"):
+            ...
+
 
 if __name__ == "__main__":
     my_list = []
+    results = []
     all_pages("https://swapi.dev/api/people/", my_list)
     for json in my_list:
-        print(json)
+        names = json.get("results")
+        for pilot in names:
+            # print(pilot.get("starships"))
+            for starship in pilot.get("starships"):
+                print(starship)
+                # print(starship.split("/"))
+                if int(starship.split("/")[-2]) == 10:
+                    results.append(pilot.get("name"))
+    print(results)
     # temp = StarshipT(2)
     # temp.download_image("corvet")
 
