@@ -1,4 +1,5 @@
 import time
+from typing import List, Any
 
 try:
     import requests
@@ -67,7 +68,7 @@ def save_image(person_name: str, path_to_image) -> bool:
 #     f.write(requests.get(images.get("data-src")).content)
 
 import json
-from utils import query
+from utils_1 import query
 from settings import Config
 from accessify import protected
 
@@ -95,8 +96,38 @@ class BaseRequest:
             raise ResourceDoesNotExists
         return status
 
+    def get_items_of_json(self, key_class: str, key_tag, url_path: str) -> list[Any]:
+        """ Return all pilots of the starship
+            :param key_class: Word for search example  starships, films
+            :type key_class: :obj: `str`
+            :param key_tag: Word for search in json example name, title
+            :type key_tag: :obj: `str`
+            :param url_path: Url for page in API
+            :type url_path: :obj: `str`
+            :param search_id: ID for ship
+            :type search_id: :obj: `int`
+            :return: List of names
+            :type: list[str]
+        """
+        running = True
+        names = []
+        while running:
+            my_response = requests.get(url_path)
+            if my_response.status_code != 200:
+                raise ResourceDoesNotExists
+            json_data = json.loads(my_response.content)
+            for resource in json_data["results"]:
+                for starship in resource.get(key_class):
+                    if starship.split("/")[-2] == str(self.id):
+                        names.append(resource.get(key_tag))
+            if bool(json_data.get("next")):
+                url_path = json_data["next"]
+            else:
+                running = False
+        return names
 
-class StarshipT(BaseRequest):
+
+class Starship(BaseRequest):
     """
     Class for all names and ids in world Star Wars.
         Usage:
@@ -113,7 +144,7 @@ class StarshipT(BaseRequest):
     """
 
     def __init__(self, id_starship: int):
-        super(StarshipT, self).__init__(id_starship, Config.get_url_api() + Config.get_starships())
+        super(Starship, self).__init__(id_starship, Config.get_url_api() + Config.get_starships())
         self.image_path = None
         self.id = id_starship
         self.url_starship = Config.get_url_starships()
@@ -125,33 +156,13 @@ class StarshipT(BaseRequest):
         """
         return self.json_data
 
-    # def get_pilots(self) -> list[str]:
-    #     """ Return all names of starhips
-    #     :return: Names of pilots
-    #     :type: :obj: `list[str]`
-    #     """
+    def get_pilots(self) -> list[Any]:
+        pilot_names = self.get_items_of_json("starships", "name", Config.get_url_api() + Config.get_people())
+        return pilot_names
 
-    def get_pilots(self, key_class: str, key_tag, url_path: str, search_id: int):
-        """ Return all pilots of the starship
-            :return:
-            :type:
-        """
-        running = True
-        names = []
-        while running:
-            my_response = requests.get(url_path)
-            if my_response.status_code != 200:
-                raise ResourceDoesNotExists
-            json_data = json.loads(my_response.content)
-            for resource in json_data["results"]:
-                for starship in resource.get(key_class):
-                    if starship.split("/")[-2] == str(search_id):
-                        names.append(resource.get(key_tag))
-            if bool(json_data.get("next")):
-                url_path = json_data["next"]
-            else:
-                running = False
-        return names
+    def get_films(self) -> list[Any]:
+        films_names = self.get_items_of_json("starships", "title", Config.get_url_api() + Config.get_films())
+        return films_names
 
     def get_descriptions(self, name: str) -> str:
         """ Return a descriptions of the ship
@@ -237,5 +248,8 @@ def get_pilots(m_jsons, id_starship):
 #     print(results)
 
 if __name__ == "__main__":
-    temp = StarshipT(10)
-    print(temp.get_pilots("starships", "name", Config.get_url_api() + Config.get_people(), 10))
+    temp = Starship(10)
+    print(temp.get_pilots())
+    # f = temp.get_films()
+    # print(temp.get_descriptions("Millennium Falcon"))
+
