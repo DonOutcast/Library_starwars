@@ -4,9 +4,9 @@ try:
     import sys
     import time
     import json
-    from settings import Config
-    from starwars.exceptions import ResourceDoesNotExists
-    from starwars.utils_1 import query, all_resource_urls
+    from src.starwars.settings import Config
+    from src.starwars.exceptions import ResourceDoesNotExists
+    from src.starwars.utils_1 import query, all_resource_urls
 except (Exception,):
     print(sys.exc_info())
 

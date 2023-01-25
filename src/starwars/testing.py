@@ -1,6 +1,10 @@
 import time
 
 try:
+    import json
+    from src.starwars.utils_1 import query
+    from src.starwars.settings import Config
+    from accessify import protected
     import requests
     from bs4 import BeautifulSoup
     from lxml import etree
@@ -66,10 +70,7 @@ def save_image(person_name: str, path_to_image) -> bool:
 # with open("image.png", 'wb') as f:
 #     f.write(requests.get(images.get("data-src")).content)
 
-import json
-from utils_1 import query
-from settings import Config
-from accessify import protected
+
 
 
 class BaseRequest:

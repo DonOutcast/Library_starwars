@@ -2,10 +2,13 @@ import time
 from typing import List, Any
 
 try:
+    import json
+    from src.starwars.utils_1 import query
+    from src.starwars.settings import Config
     import requests
     from bs4 import BeautifulSoup
     from lxml import etree
-    from starwars.exceptions import ResourceDoesNotExists
+    from src.starwars.exceptions import ResourceDoesNotExists
     import sys
 except (Exception,) as e:
     print(sys.exc_info())
@@ -69,9 +72,7 @@ def save_image(person_name: str, path_to_image) -> bool:
 # with open("image.png", 'wb') as f:
 #     f.write(requests.get(images.get("data-src")).content)
 
-import json
-from starwars.utils_1 import query
-from starwars.settings import Config
+
 
 
 class BaseRequest:
