@@ -20,4 +20,4 @@ jobs:
       - name: Ls
         run: ls && pwd
       - name: Test with unitest
-        run:  python -m unittest example/test_foo.py
+        run:  python -m unittest src/example/test_foo.py
