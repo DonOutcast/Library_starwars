@@ -1,0 +1,9 @@
+name: UnitTest
+on: workflow_dispatch
+
+jobs:
+  print:
+    runs-on: ubuntu-22.0.4
+    steps:
+      - name: Print to console
+        run: echo Hello World
