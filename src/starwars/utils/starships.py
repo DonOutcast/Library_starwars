@@ -5,7 +5,7 @@ try:
     import requests
     from bs4 import BeautifulSoup
     from lxml import etree
-    from exceptions import ResourceDoesNotExists
+    from starwars.exceptions import ResourceDoesNotExists
     import sys
 except (Exception,) as e:
     print(sys.exc_info())
@@ -70,8 +70,8 @@ def save_image(person_name: str, path_to_image) -> bool:
 #     f.write(requests.get(images.get("data-src")).content)
 
 import json
-from utils_1 import query
-from settings import Config
+from starwars.utils_1 import query
+from starwars.settings import Config
 
 
 class BaseRequest:
@@ -181,7 +181,17 @@ class Starship(BaseRequest):
             :return: Name
             :type: :obj: `str`
         """
-        return  self.json_data.get("name")
+        return self.json_data.get("name")
+
+    def get_model(self):
+        """
+         Return a model of the starship
+         :return: Model
+         :type: :obj: `str`
+        :return:
+        """
+        return self.json_data.get("model")
+
     def get_descriptions(self, name: str) -> str:
         """ Return a descriptions of the ship
             :return: `obj` str

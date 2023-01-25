@@ -5,8 +5,8 @@ try:
     import time
     import json
     from settings import Config
-    from exceptions import ResourceDoesNotExists
-    from utils import query, all_resource_urls
+    from starwars.exceptions import ResourceDoesNotExists
+    from starwars.utils_1 import query, all_resource_urls
 except (Exception,):
     print(sys.exc_info())
 
