@@ -1,5 +1,5 @@
 import unittest
-from src.starwars.utils.starships import Starship
+from src.star_wars.utils.starships import Starship
 
 
 class StarWarsTest(unittest.TestCase):

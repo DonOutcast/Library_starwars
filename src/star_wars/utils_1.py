@@ -3,7 +3,7 @@ try:
     import json
     import requests
     import fake_useragent
-    from src.starwars.exceptions import ResourceDoesNotExists
+    from src.star_wars.exceptions import ResourceDoesNotExists
 except (Exception,):
     print(sys.exc_info())
 

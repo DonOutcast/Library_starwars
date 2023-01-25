@@ -1,23 +1,25 @@
 import time
+from typing import List, Any
 
 try:
     import json
-    from src.starwars.utils_1 import query
-    from src.starwars.settings import Config
-    from accessify import protected
+    from src.star_wars.utils_1 import query
+    from src.star_wars.settings import Config
     import requests
     from bs4 import BeautifulSoup
     from lxml import etree
-    from exceptions import ResourceDoesNotExists
+    from src.star_wars.exceptions import ResourceDoesNotExists
     import sys
 except (Exception,) as e:
     print(sys.exc_info())
-HEADERS = {
-    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"}
-url = "https://www.starwars.com/databank/luke-skywalker"
-new_url = "https://www.starwars.com/databank/Leia-Organa"
-response = requests.get(new_url, headers=HEADERS)
-soup = BeautifulSoup(response.content, "html.parser")
+
+
+# HEADERS = {
+#     "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"}
+# url = "https://www.starwars.com/databank/luke-skywalker"
+# new_url = "https://www.starwars.com/databank/Leia-Organa"
+# response = requests.get(new_url, headers=HEADERS)
+# soup = BeautifulSoup(response.content, "html.parser")
 
 
 def get_url_image(url_person: str, in_soup: BeautifulSoup) -> str:
@@ -71,8 +73,6 @@ def save_image(person_name: str, path_to_image) -> bool:
 #     f.write(requests.get(images.get("data-src")).content)
 
 
-
-
 class BaseRequest:
     """
     The Class generate response with json
@@ -88,7 +88,6 @@ class BaseRequest:
         response_json = query("{0}/{1}".format(url_path, id_search))
         self.json_data = response_json.json()
 
-    @protected
     # @staticmethod
     def _check_status_code(self, url_path):
         status = requests.get(url_path)
@@ -96,8 +95,38 @@ class BaseRequest:
             raise ResourceDoesNotExists
         return status
 
+    def _get_items_of_json(self, key_class: str, key_tag, url_path: str) -> list[Any]:
+        """ Return all pilots of the starship
+            :param key_class: Word for search example  starships, films
+            :type key_class: :obj: `str`
+            :param key_tag: Word for search in json example name, title
+            :type key_tag: :obj: `str`
+            :param url_path: Url for page in API
+            :type url_path: :obj: `str`
+            :param search_id: ID for ship
+            :type search_id: :obj: `int`
+            :return: List of names
+            :type: list[str]
+        """
+        running = True
+        names = []
+        while running:
+            my_response = requests.get(url_path)
+            if my_response.status_code != 200:
+                raise ResourceDoesNotExists
+            json_data = json.loads(my_response.content)
+            for resource in json_data["results"]:
+                for starship in resource.get(key_class):
+                    if starship.split("/")[-2] == str(self.id):
+                        names.append(resource.get(key_tag))
+            if bool(json_data.get("next")):
+                url_path = json_data["next"]
+            else:
+                running = False
+        return names
 
-class StarshipT(BaseRequest):
+
+class Starship(BaseRequest):
     """
     Class for all names and ids in world Star Wars.
         Usage:
@@ -114,7 +143,7 @@ class StarshipT(BaseRequest):
     """
 
     def __init__(self, id_starship: int):
-        super(StarshipT, self).__init__(id_starship, Config.get_url_api() + Config.get_starships())
+        super(Starship, self).__init__(id_starship, Config.get_url_api() + Config.get_starships())
         self.image_path = None
         self.id = id_starship
         self.url_starship = Config.get_url_starships()
@@ -126,33 +155,41 @@ class StarshipT(BaseRequest):
         """
         return self.json_data
 
-    # def get_pilots(self) -> list[str]:
-    #     """ Return all names of starhips
-    #     :return: Names of pilots
-    #     :type: :obj: `list[str]`
-    #     """
-
-    def get_pilots(self, key_class: str, key_tag, url_path: str, search_id: int):
-        """ Return all pilots of the starship
-            :return:
-            :type:
+    def get_pilots(self) -> list[Any]:
         """
-        running = True
-        names = []
-        while running:
-            my_response = requests.get(url_path)
-            if my_response.status_code != 200:
-                raise ResourceDoesNotExists
-            json_data = json.loads(my_response.content)
-            for resource in json_data["results"]:
-                for starship in resource.get(key_class):
-                    if starship.split("/")[-2] == str(search_id):
-                        names.append(resource.get(key_tag))
-            if bool(json_data.get("next")):
-                url_path = json_data["next"]
-            else:
-                running = False
-        return names
+            Return all pilots of the starships
+            :return: Names of all pilots if haves
+            :type: :obj: `List[str]`
+        """
+        pilot_names = self._get_items_of_json("starships", "name", Config.get_url_api() + Config.get_people())
+        return pilot_names
+
+    def get_films(self) -> list[Any]:
+        """
+            Return all films with the starship
+            :return: Names of all films with the starship
+            :type: :obj: `list[str]`
+        :return:
+        """
+        films_names = self._get_items_of_json("starships", "title", Config.get_url_api() + Config.get_films())
+        return films_names
+
+    def get_name(self):
+        """
+            Return a name of the starship
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("name")
+
+    def get_model(self):
+        """
+         Return a model of the starship
+         :return: Model
+         :type: :obj: `str`
+        :return:
+        """
+        return self.json_data.get("model")
 
     def get_descriptions(self, name: str) -> str:
         """ Return a descriptions of the ship
@@ -183,7 +220,7 @@ class StarshipT(BaseRequest):
                 result = p.select_one("img.pi-image-thumbnail").get("src")
                 break
             else:
-                result = soup.select_one("img.thumbimage").get("data-src")
+                result = my_soup.select_one("img.thumbimage").get("data-src")
                 break
         self.image_path = result
         return result
@@ -238,6 +275,7 @@ def get_pilots(m_jsons, id_starship):
 #     print(results)
 
 if __name__ == "__main__":
-    temp = StarshipT(10)
-    print(temp.get_pilots("starships", "name", Config.get_url_api() + Config.get_people(), 10))
-
+    temp = Starship(10)
+    print(temp.get_pilots())
+    # f = temp.get_films()
+    # print(temp.get_descriptions("Millennium Falcon"))
