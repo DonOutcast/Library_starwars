@@ -67,7 +67,7 @@ def save_image(person_name: str, path_to_image) -> bool:
 #     f.write(requests.get(images.get("data-src")).content)
 
 import json
-from utils import query
+from utils_1 import query
 from settings import Config
 from accessify import protected
 
@@ -239,3 +239,4 @@ def get_pilots(m_jsons, id_starship):
 if __name__ == "__main__":
     temp = StarshipT(10)
     print(temp.get_pilots("starships", "name", Config.get_url_api() + Config.get_people(), 10))
+

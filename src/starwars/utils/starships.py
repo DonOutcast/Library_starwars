@@ -9,12 +9,14 @@ try:
     import sys
 except (Exception,) as e:
     print(sys.exc_info())
-HEADERS = {
-    "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"}
-url = "https://www.starwars.com/databank/luke-skywalker"
-new_url = "https://www.starwars.com/databank/Leia-Organa"
-response = requests.get(new_url, headers=HEADERS)
-soup = BeautifulSoup(response.content, "html.parser")
+
+
+# HEADERS = {
+#     "user-agent": "Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/105.0.0.0 Safari/537.36"}
+# url = "https://www.starwars.com/databank/luke-skywalker"
+# new_url = "https://www.starwars.com/databank/Leia-Organa"
+# response = requests.get(new_url, headers=HEADERS)
+# soup = BeautifulSoup(response.content, "html.parser")
 
 
 def get_url_image(url_person: str, in_soup: BeautifulSoup) -> str:
@@ -70,7 +72,6 @@ def save_image(person_name: str, path_to_image) -> bool:
 import json
 from utils_1 import query
 from settings import Config
-from accessify import protected
 
 
 class BaseRequest:
@@ -88,7 +89,6 @@ class BaseRequest:
         response_json = query("{0}/{1}".format(url_path, id_search))
         self.json_data = response_json.json()
 
-    @protected
     # @staticmethod
     def _check_status_code(self, url_path):
         status = requests.get(url_path)
@@ -96,7 +96,7 @@ class BaseRequest:
             raise ResourceDoesNotExists
         return status
 
-    def get_items_of_json(self, key_class: str, key_tag, url_path: str) -> list[Any]:
+    def _get_items_of_json(self, key_class: str, key_tag, url_path: str) -> list[Any]:
         """ Return all pilots of the starship
             :param key_class: Word for search example  starships, films
             :type key_class: :obj: `str`
@@ -157,13 +157,31 @@ class Starship(BaseRequest):
         return self.json_data
 
     def get_pilots(self) -> list[Any]:
-        pilot_names = self.get_items_of_json("starships", "name", Config.get_url_api() + Config.get_people())
+        """
+            Return all pilots of the starships
+            :return: Names of all pilots if haves
+            :type: :obj: `List[str]`
+        """
+        pilot_names = self._get_items_of_json("starships", "name", Config.get_url_api() + Config.get_people())
         return pilot_names
 
     def get_films(self) -> list[Any]:
-        films_names = self.get_items_of_json("starships", "title", Config.get_url_api() + Config.get_films())
+        """
+            Return all films with the starship
+            :return: Names of all films with the starship
+            :type: :obj: `list[str]`
+        :return:
+        """
+        films_names = self._get_items_of_json("starships", "title", Config.get_url_api() + Config.get_films())
         return films_names
 
+    def get_name(self):
+        """
+            Return a name of the starship
+            :return: Name
+            :type: :obj: `str`
+        """
+        return  self.json_data.get("name")
     def get_descriptions(self, name: str) -> str:
         """ Return a descriptions of the ship
             :return: `obj` str
@@ -193,7 +211,7 @@ class Starship(BaseRequest):
                 result = p.select_one("img.pi-image-thumbnail").get("src")
                 break
             else:
-                result = soup.select_one("img.thumbimage").get("data-src")
+                result = my_soup.select_one("img.thumbimage").get("data-src")
                 break
         self.image_path = result
         return result
@@ -252,4 +270,3 @@ if __name__ == "__main__":
     print(temp.get_pilots())
     # f = temp.get_films()
     # print(temp.get_descriptions("Millennium Falcon"))
-
