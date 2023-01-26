@@ -191,6 +191,28 @@ class Starship(BaseRequest):
         """
         return self.json_data.get("model")
 
+    def get_manufacture(self):
+        """
+        Return a manufacture of the starship
+        :return: Manufacture
+        :type: :obj: `str`
+        """
+        return self.json_data.get("manufacture")
+
+    def get_cost_in_credits(self):
+        """
+        Return a Cost in credits
+        :return: Cost in credits
+        :type: :obj: `str`
+        """
+        return self.json_data.get("cost_in_credits")
+    def get_length(self):
+        """
+        Return a length
+        :return: Length
+        :type: :obj: `str`
+        """
+        return self.json_data.get("length")
     def get_descriptions(self, name: str) -> str:
         """ Return a descriptions of the ship
             :return: `obj` str
@@ -276,6 +298,7 @@ def get_pilots(m_jsons, id_starship):
 
 if __name__ == "__main__":
     temp = Starship(10)
-    print(temp.get_pilots())
+    print(temp.get_length())
+
     # f = temp.get_films()
     # print(temp.get_descriptions("Millennium Falcon"))
