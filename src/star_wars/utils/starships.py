@@ -197,7 +197,7 @@ class Starship(BaseRequest):
         :return: Manufacture
         :type: :obj: `str`
         """
-        return self.json_data.get("manufacture")
+        return self.json_data.get("manufacturer")
 
     def get_cost_in_credits(self):
         """
@@ -298,6 +298,7 @@ def get_pilots(m_jsons, id_starship):
 
 if __name__ == "__main__":
     temp = Starship(10)
+    print(temp.get_manufacture())
     print(temp.get_length())
 
     # f = temp.get_films()
