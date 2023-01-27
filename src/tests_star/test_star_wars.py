@@ -25,8 +25,14 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(starship.get_starship_class(), "Light freighter", "should Light freighter")
         self.assertEqual(starship.get_date_created(), "2014-12-10T16:59:45.094000Z",
                          "should 2014-12-10T16:59:45.094000Z")
-        self.assertEqual(starship.get_date_edited(), "2014-12-20T21:23:49.880000Z", "should 2014-12-20T21:23:49.880000Z")
-        self.assertEqual(starship.all_jsons, 3, "should 3")
+        self.assertEqual(starship.get_date_edited(), "2014-12-20T21:23:49.880000Z",
+                         "should 2014-12-20T21:23:49.880000Z")
+        self.assertEqual(len(starship.all_jsons), 3, "should 3")
+        self.assertEqual(starship.get_photo_ship("Millennium Falcon"),
+                         "https://static.wikia.nocookie.net/starwars/images/5/52/Millennium_Falcon_Fathead_TROS.png/revision/latest/scale-to-width-down/500?cb=20221029015218",
+                         "should https://static.wikia.nocookie.net/starwars/images/5/52/Millennium_Falcon_Fathead_TROS.png/revision/latest/scale-to-width-down/500?cb=20221029015218")
+        self.assertTrue(starship.download_image("test.png"))
+
 
 if __name__ == "__main__":
     unittest.main()

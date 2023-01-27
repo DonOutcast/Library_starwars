@@ -1,15 +1,14 @@
-import time
-from typing import List, Any
-
 try:
+    import sys
     import json
+    import os.path
+    import requests
+    from lxml import etree
+    from typing import List, Any
+    from bs4 import BeautifulSoup
     from src.star_wars.utils_1 import query
     from src.star_wars.settings import Config
-    import requests
-    from bs4 import BeautifulSoup
-    from lxml import etree
     from src.star_wars.exceptions import ResourceDoesNotExists
-    import sys
 except (Exception,) as e:
     print(sys.exc_info())
 
@@ -159,7 +158,7 @@ class Starship(BaseRequest):
         :caption: Creating instance of StarWars
 
         from star_wars import star_wars
-        jedi = StarWars(
+        jedi = StarWars
         # and use jedi methods.
 
         :param id_starship: of a starship, should be obtained from StarWars
@@ -353,18 +352,18 @@ class Starship(BaseRequest):
         self.image_path = result
         return result
 
-    def download_image(self, path: str) -> None:
+    def download_image(self, path_photo: str) -> bool:
         """ The function save  image on your machine
-            :param path: Name and path to save
-            :type path: `obj` str
+            :param url_path: Name and path to save
+            :type url_path: `obj` str
         """
-        if BaseRequest._check_status_code() == 200:
-            with open("image.png", 'wb') as file:
+        self.get_photo_ship(self.get_name())
+        if BaseRequest._check_status_code(self.image_path):
+            with open(path_photo, 'wb') as file:
                 file.write(requests.get(self.image_path).content)
+            return os.path.exists(path_photo)
 
 
 if __name__ == "__main__":
     temp = Starship(10)
-    # print(temp.get_consumables())
-    # temp.all_pages()
-    print()
+    print(temp.download_image("test.png"))
