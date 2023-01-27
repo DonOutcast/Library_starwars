@@ -206,13 +206,46 @@ class Starship(BaseRequest):
         :type: :obj: `str`
         """
         return self.json_data.get("cost_in_credits")
-    def get_length(self):
+
+    def get_length(self) -> str:
         """
-        Return a length
-        :return: Length
+        Return a length  of the starships'
+        :return: length
         :type: :obj: `str`
         """
         return self.json_data.get("length")
+
+    def get_max_atmosphering_speed(self) -> str:
+        """
+        Return a max atmospherins speed  of the starships'
+        :return: Max speed
+        :type: :obj: `str`
+        """
+        return self.json_data.get('max_atmosphering_speed')
+
+    def get_crew(self) -> str:
+        """
+        Return a crew of the starship
+        :return: Crew
+        :type: :obj: `str`
+        """
+        return self.json_data.get("crew")
+
+    def get_passengers(self) -> str:
+        """
+        Return a passengers of the starship
+        :return: Passengers
+        :type: :obj: `str`
+        """
+        return self.json_data.get("passengers")
+
+    def get_cargo_capacity(self) -> str:
+        """
+        Return a cargo capacity of the starship
+        :return: Capacity
+        :type: :obj: `str`
+        """
+        return self.json_data.get("cargo_capacity")
     def get_descriptions(self, name: str) -> str:
         """ Return a descriptions of the ship
             :return: `obj` str
@@ -298,8 +331,9 @@ def get_pilots(m_jsons, id_starship):
 
 if __name__ == "__main__":
     temp = Starship(10)
-    print(temp.get_manufacture())
-    print(temp.get_length())
+    print(temp.get_max_atmosphering_speed())
+    print(temp.get_crew())
+    print(temp.get_passengers())
 
     # f = temp.get_films()
     # print(temp.get_descriptions("Millennium Falcon"))

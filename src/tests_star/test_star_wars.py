@@ -15,5 +15,9 @@ class StarWarsTest(unittest.TestCase):
                          "should Corellian Engineering Corporation")
         self.assertEqual(starship.get_cost_in_credits(), "100000", "should 100000")
         self.assertEqual(starship.get_length(), "34.37", "should 34.37")
+        self.assertEqual(starship.get_max_atmosphering_speed(), "1050", "should 1050")
+        self.assertEqual(starship.get_crew(), "4", "should 4")
+        self.assertEqual(starship.get_passengers(), "6", "should 6")
+        self.assertEqual(starship.get_cargo_capacity(), "100000", "should 100000")
 if __name__ == "__main__":
     unittest.main()
