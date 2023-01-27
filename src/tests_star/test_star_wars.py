@@ -22,6 +22,7 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(starship.get_consumables(), "2 months", "should 2 months")
         self.assertEqual(starship.get_hyperdrive_rating(), "0.5", "should 0.5")
         self.assertEqual(starship.get_mglt(), "75", "should 75")
+        self.assertEqual(starship.get_starship_class(), "Light freighter", "should Light freighter")
         self.assertEqual(starship.get_date_created(), "2014-12-10T16:59:45.094000Z",
                          "should 2014-12-10T16:59:45.094000Z")
         self.assertEqual(starship.get_date_edited(), "2014-12-20T21:23:49.880000Z", "should 2014-12-20T21:23:49.880000Z")
