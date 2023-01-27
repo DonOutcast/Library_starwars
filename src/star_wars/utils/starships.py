@@ -87,13 +87,23 @@ class BaseRequest:
     def __init__(self, id_search: int, url_path: str) -> None:
         response_json = query("{0}/{1}".format(url_path, id_search))
         self.json_data = response_json.json()
+        self.all_jsons = []
+        self.all_pages(url_path)
 
     # @staticmethod
-    def _check_status_code(self, url_path):
+    @staticmethod
+    def _check_status_code(url_path):
+        """
+        The function a check status code of get or post requests
+        :param url_path: Url path
+        :type: :obj:  `str`
+        :return: True if status code == 200 else raise
+        :type: :obj: `bool`
+        """
         status = requests.get(url_path)
-        if status != 200:
+        if status.status_code != 200:
             raise ResourceDoesNotExists
-        return status
+        return True
 
     def _get_items_of_json(self, key_class: str, key_tag, url_path: str) -> list[Any]:
         """ Return all pilots of the starship
@@ -124,6 +134,20 @@ class BaseRequest:
             else:
                 running = False
         return names
+
+    def all_pages(self, url_path) -> None:
+        """
+
+        :param url_path:
+        :return:
+        """
+        self._check_status_code(url_path)
+        response = requests.get(url_path)
+        json_data = response.json()
+        if json_data.get("next"):
+            url_path = json_data.get("next")
+            self.all_jsons.append(json_data)
+            return BaseRequest.all_pages(self, url_path)
 
 
 class Starship(BaseRequest):
@@ -294,6 +318,7 @@ class Starship(BaseRequest):
         :type: :obj: `str`
         """
         return self.json_data.get("edited")
+
     def get_descriptions(self, name: str) -> str:
         """ Return a descriptions of the ship
             :return: `obj` str
@@ -333,53 +358,13 @@ class Starship(BaseRequest):
             :param path: Name and path to save
             :type path: `obj` str
         """
-        if BaseRequest._check_status_code(self.image_path) == 200:
+        if BaseRequest._check_status_code() == 200:
             with open("image.png", 'wb') as file:
                 file.write(requests.get(self.image_path).content)
 
 
-# def test_find():
-#     url_path = "https://starwars.fandom.com/wiki/"
-#     response = requests.get(url_path + name.replace(" ", "_"))
-#     print(response.status_code)
-#     soup = BeautifulSoup(response.content, "lxml")
-#     soup_1 = soup.find("div", class_="page-content").find("div", {"id": "mw-content-text"})
-#     print(soup_1.select("div > p:nth-child(6)"))
-
-
-def all_pages(url_path, m_list):
-    response = requests.get(url_path)
-    json_data = response.json()
-    if json_data.get("next"):
-        url_path = json_data.get("next")
-        m_list.append(json_data)
-        return all_pages(url_path, m_list)
-
-
-def get_pilots(m_jsons, id_starship):
-    for json in id_starship:
-        if json.get("results"):
-            ...
-
-
-# def get_pilots():
-#     my_list = []
-#     results = []
-#     all_pages("https://swapi.dev/api/people/", my_list)
-#     for json in my_list:
-#         names = json.get("results")
-#         for pilot in names:
-#             # print(pilot.get("starships"))
-#             for starship in pilot.get("starships"):
-#                 print(starship)
-#                 # print(starship.split("/"))
-#                 if int(starship.split("/")[-2]) == 10:
-#                     results.append(pilot.get("name"))
-#     print(results)
-
 if __name__ == "__main__":
     temp = Starship(10)
-    print(temp.get_consumables())
-
-    # f = temp.get_films()
-    # print(temp.get_descriptions("Millennium Falcon"))
+    # print(temp.get_consumables())
+    # temp.all_pages()
+    print()

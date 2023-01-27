@@ -26,7 +26,7 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(starship.get_date_created(), "2014-12-10T16:59:45.094000Z",
                          "should 2014-12-10T16:59:45.094000Z")
         self.assertEqual(starship.get_date_edited(), "2014-12-20T21:23:49.880000Z", "should 2014-12-20T21:23:49.880000Z")
-
+        self.assertEqual(starship.all_jsons, 3, "should 3")
 
 if __name__ == "__main__":
     unittest.main()
