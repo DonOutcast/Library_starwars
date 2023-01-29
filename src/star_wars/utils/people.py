@@ -110,12 +110,29 @@ class People(BaseRequest):
 
     def get_birth_year(self):
         """
-            Return a birth year color of the people
+            Return a birth year of the people
             :return: Name
             :type: :obj: `str`
         """
         return self.json_data.get("birth_year")
 
+    def get_gender(self):
+        """
+            Return a gender of the people
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("gender")
+
+    def get_species(self):
+        """
+            Return a species of the people
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("species")
+
+
 if __name__ == "__main__":
     temp = People(10)
-    print(temp.get_birth_year())
+    print(temp.get_species())

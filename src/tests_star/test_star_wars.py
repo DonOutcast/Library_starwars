@@ -66,5 +66,9 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(people.get_skin_color(), "fair", "should fair")
         self.assertEqual(people.get_eye_color(), "blue-gray", "should blue-gray")
         self.assertEqual(people.get_birth_year(), "57BBY", "should 57BBY")
+        self.assertEqual(people.get_gender(), "male", "should male")
+        self.assertEqual(people.get_species(), [], "should  []")
+
+
 if __name__ == "__main__":
     unittest.main()
