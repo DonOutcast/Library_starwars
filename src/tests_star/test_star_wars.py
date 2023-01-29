@@ -28,7 +28,7 @@ class StarWarsTest(unittest.TestCase):
     #                  "should 2014-12-10T16:59:45.094000Z")
     # self.assertEqual(starship.get_date_edited(), "2014-12-20T21:23:49.880000Z",
     #                  "should 2014-12-20T21:23:49.880000Z")
-    # self.assertEqual(len(starship.all_jsons), 3, "should 3")
+    # self.assertEqual(len(starship.get_all_jsons()), 3, "should 3")
     # self.assertEqual(starship.get_photo_ship("Millennium Falcon"),
     #                  "https://static.wikia.nocookie.net/starwars/images/5/52/Millennium_Falcon_Fathead_TROS.png/revision/latest/scale-to-width-down/500?cb=20221029015218",
     #                  "should https://static.wikia.nocookie.net/starwars/images/5/52/Millennium_Falcon_Fathead_TROS.png/revision/latest/scale-to-width-down/500?cb=20221029015218")
@@ -50,7 +50,7 @@ class StarWarsTest(unittest.TestCase):
                           'created': '2014-12-10T16:16:29.192000Z', 'edited': '2014-12-20T21:17:50.325000Z',
                           'url': 'https://swapi.dev/api/people/10/'},
                          "should {'name': 'Obi-Wan Kenobi', 'height': '182', 'mass': '77', 'hair_color': 'auburn, white', 'skin_color': 'fair', 'eye_color': 'blue-gray', 'birth_year': '57BBY', 'gender': 'male', 'homeworld': 'https://swapi.dev/api/planets/20/', 'films': ['https://swapi.dev/api/films/1/', 'https://swapi.dev/api/films/2/', 'https://swapi.dev/api/films/3/', 'https://swapi.dev/api/films/4/', 'https://swapi.dev/api/films/5/', 'https://swapi.dev/api/films/6/'], 'species': [], 'vehicles': ['https://swapi.dev/api/vehicles/38/'], 'starships': ['https://swapi.dev/api/starships/48/', 'https://swapi.dev/api/starships/59/', 'https://swapi.dev/api/starships/64/', 'https://swapi.dev/api/starships/65/', 'https://swapi.dev/api/starships/74/'], 'created': '2014-12-10T16:16:29.192000Z', 'edited': '2014-12-20T21:17:50.325000Z', 'url': 'https://swapi.dev/api/people/10/'}")
-        self.assertEqual(len(people.all_jsons), 8, "should 8")
+        self.assertEqual(len(people.get_all_jsons()), 8, "should 8")
         self.assertEqual(people.get_starships(),
                          ['Jedi starfighter', 'Trade Federation cruiser', 'Naboo star skiff', 'Jedi Interceptor',
                           'Belbullab-22 starfighter'],
