@@ -40,8 +40,27 @@ class People(BaseRequest):
         """
         return self.json_data
 
+    def get_starships(self):
+        """
+                Return all starships of the people
+                :return: Names of all pilots if haves
+                :type: :obj: `List[str]`
+            """
+
+        starships_names = self._get_items_of_json("pilots", "name", Config.get_url_api() + Config.get_starships())
+        return starships_names
+
+    def get_films(self):
+        """
+            Return all films with the people
+            :return: Names of all films with the people
+            :type: :obj: `list[str]`
+        :return:
+        """
+        films_names = self._get_items_of_json("characters", "title", Config.get_url_api() + Config.get_films())
+        return films_names
+
 
 if __name__ == "__main__":
     temp = People(10)
-    print(temp.get_people_json())
-    print(len(temp.all_jsons))
+    print(temp.get_starships())
