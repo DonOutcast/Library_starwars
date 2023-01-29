@@ -62,13 +62,20 @@ class People(BaseRequest):
 
     def get_name(self):
         """
-            Return a name of the starship
+            Return a name of the people
             :return: Name
             :type: :obj: `str`
         """
         return self.json_data.get("name")
 
+    def get_height(self):
+        """
+            Return a height of the people
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("height")
 
 if __name__ == "__main__":
     temp = People(10)
-    print(temp.get_name())
+    print(temp.get_height())

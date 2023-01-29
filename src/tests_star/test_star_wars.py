@@ -60,7 +60,7 @@ class StarWarsTest(unittest.TestCase):
                           'Attack of the Clones', 'Revenge of the Sith'],
                          "should ['A New Hope', 'The Empire Strikes Back', 'Return of the Jedi', 'The Phantom Menace', 'Attack of the Clones', 'Revenge of the Sith']")
         self.assertEqual(people.get_name(), "Obi-Wan Kenobi", "should Obi-Wan Kenobi")
-
+        self.assertEqual(people.get_height(), 182, "should 182")
 
 if __name__ == "__main__":
     unittest.main()
