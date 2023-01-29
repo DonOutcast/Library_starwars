@@ -132,7 +132,24 @@ class People(BaseRequest):
         """
         return self.json_data.get("species")
 
+    def get_date_created(self) -> str:
+        """
+        Return a date for created the people
+        :return: Date
+        :type: :obj: `str`
+        """
+        return self.json_data.get("created")
+
+    def get_date_edited(self):
+        """
+        Return a date for edited the people
+        :return: Date
+        :type: :obj: `str`
+        """
+        return self.json_data.get("edited")
+
 
 if __name__ == "__main__":
     temp = People(10)
-    print(temp.get_species())
+    print(temp.get_date_created())
+    print(temp.get_date_edited())

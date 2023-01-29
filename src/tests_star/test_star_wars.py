@@ -68,7 +68,8 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(people.get_birth_year(), "57BBY", "should 57BBY")
         self.assertEqual(people.get_gender(), "male", "should male")
         self.assertEqual(people.get_species(), [], "should  []")
-
+        self.assertEqual(people.get_date_created(), "2014-12-10T16:16:29.192000Z", "should 2014-12-10T16:16:29.192000Z")
+        self.assertEqual(people.get_date_edited(), "2014-12-20T21:17:50.325000Z", "should 2014-12-20T21:17:50.325000Z")
 
 if __name__ == "__main__":
     unittest.main()
