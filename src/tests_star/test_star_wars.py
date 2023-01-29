@@ -73,5 +73,6 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(people.get_vehicles(), ['Tribubble bongo'], "should ['Tribubble bongo']")
         self.assertEqual(people.get_home_world(), "Stewjon", "should Stewjon")
 
+
 if __name__ == "__main__":
     unittest.main()

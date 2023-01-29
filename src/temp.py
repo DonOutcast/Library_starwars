@@ -9,10 +9,20 @@ my_dict = {
     }
 }
 
-for key, value in my_dict.items():
-    next = value.get("next")
-    
-    print(key, value)
+tmp = None
+while my_dict:
+        next = my_dict['next']
+        my_dict['next'] = tmp
+        tmp = my_dict
+        my_dict = next
+
+my_dict = tmp
+print(my_dict)
+
+# for key, value in my_dict.items():
+#     next = value.get("next")
+#
+#     print(key, value)
 
 # def rever(m_dict):
 #     m_dict = {}
