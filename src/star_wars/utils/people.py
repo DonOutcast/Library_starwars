@@ -60,7 +60,15 @@ class People(BaseRequest):
         films_names = self._get_items_of_json("characters", "title", Config.get_url_api() + Config.get_films())
         return films_names
 
+    def get_name(self):
+        """
+            Return a name of the starship
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("name")
+
 
 if __name__ == "__main__":
     temp = People(10)
-    print(temp.get_films())
+    print(temp.get_name())

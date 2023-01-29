@@ -59,6 +59,7 @@ class StarWarsTest(unittest.TestCase):
                          ['A New Hope', 'The Empire Strikes Back', 'Return of the Jedi', 'The Phantom Menace',
                           'Attack of the Clones', 'Revenge of the Sith'],
                          "should ['A New Hope', 'The Empire Strikes Back', 'Return of the Jedi', 'The Phantom Menace', 'Attack of the Clones', 'Revenge of the Sith']")
+        self.assertEqual(people.get_name(), "Obi-Wan Kenobi", "should Obi-Wan Kenobi")
 
 
 if __name__ == "__main__":
