@@ -76,6 +76,31 @@ class People(BaseRequest):
         """
         return self.json_data.get("height")
 
+    def get_mass(self):
+        """
+            Return a mass of the people
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("mass")
+
+    def get_hair_color(self):
+        """
+            Return a hair color of the people
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("hair_color")
+
+    def get_skin_color(self):
+        """
+            Return a hair color of the people
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("skin_color")
+
+
 if __name__ == "__main__":
     temp = People(10)
-    print(temp.get_height())
+    print(temp.get_skin_color())
