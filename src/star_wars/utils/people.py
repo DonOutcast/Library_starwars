@@ -130,7 +130,15 @@ class People(BaseRequest):
             :return: Name
             :type: :obj: `str`
         """
-        return self.json_data.get("species")
+        return self._get_items_of_json("people", "name", Config.get_url_api() + Config.get_species())
+
+    def get_vehicles(self):
+        """
+            Return a vehicles of the people
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self._get_items_of_json("pilots", "name", Config.get_url_api() + Config.get_vehicles())
 
     def get_date_created(self) -> str:
         """
@@ -148,8 +156,16 @@ class People(BaseRequest):
         """
         return self.json_data.get("edited")
 
+    def get_home_world(self):
+        """
+        Return a home world the people
+        :return: Date
+        :type: :obj: `str`
+        """
+        home = requests.get(self.json_data.get("homeworld")).json().get("name")
+        return home
+
 
 if __name__ == "__main__":
     temp = People(10)
-    print(temp.get_date_created())
-    print(temp.get_date_edited())
+    print(temp.get_vehicles())
