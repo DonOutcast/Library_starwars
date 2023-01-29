@@ -108,7 +108,14 @@ class People(BaseRequest):
         """
         return self.json_data.get("eye_color")
 
+    def get_birth_year(self):
+        """
+            Return a birth year color of the people
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("birth_year")
 
 if __name__ == "__main__":
     temp = People(10)
-    print(temp.get_eye_color())
+    print(temp.get_birth_year())
