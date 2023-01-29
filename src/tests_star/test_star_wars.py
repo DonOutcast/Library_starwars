@@ -55,6 +55,10 @@ class StarWarsTest(unittest.TestCase):
                          ['Jedi starfighter', 'Trade Federation cruiser', 'Naboo star skiff', 'Jedi Interceptor',
                           'Belbullab-22 starfighter'],
                          "should ['Jedi starfighter', 'Trade Federation cruiser', 'Naboo star skiff', 'Jedi Interceptor', 'Belbullab-22 starfighter']")
+        self.assertEqual(people.get_films(),
+                         ['A New Hope', 'The Empire Strikes Back', 'Return of the Jedi', 'The Phantom Menace',
+                          'Attack of the Clones', 'Revenge of the Sith'],
+                         "should ['A New Hope', 'The Empire Strikes Back', 'Return of the Jedi', 'The Phantom Menace', 'Attack of the Clones', 'Revenge of the Sith']")
 
 
 if __name__ == "__main__":

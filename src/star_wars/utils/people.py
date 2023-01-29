@@ -63,4 +63,4 @@ class People(BaseRequest):
 
 if __name__ == "__main__":
     temp = People(10)
-    print(temp.get_starships())
+    print(temp.get_films())
