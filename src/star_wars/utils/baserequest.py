@@ -23,8 +23,9 @@ class BaseRequest:
     def __init__(self, id_search: int, url_path: str) -> None:
         response_json = query("{0}/{1}".format(url_path, id_search))
         self.json_data = response_json.json()
+        self.url_path = url_path
         self.all_jsons = []
-        self.all_pages(url_path)
+        # self.all_pages(url_path)
 
     # @staticmethod
     @staticmethod
@@ -69,7 +70,7 @@ class BaseRequest:
                 running = False
         return names
 
-    def all_pages(self, url_path) -> None:
+    def _all_pages(self, url_path) -> None:
         """
 
         :param url_path:
@@ -81,4 +82,13 @@ class BaseRequest:
         if json_data.get("next"):
             url_path = json_data.get("next")
             self.all_jsons.append(json_data)
-            return BaseRequest.all_pages(self, url_path)
+            return BaseRequest._all_pages(self, url_path)
+
+    def get_all_jsons(self) -> list:
+        """
+        Get jsons date
+        :return: All jsons
+        :type: :obj: `list`
+        """
+        self._all_pages(self.url_path)
+        return self.all_jsons

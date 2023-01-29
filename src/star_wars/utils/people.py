@@ -168,4 +168,5 @@ class People(BaseRequest):
 
 if __name__ == "__main__":
     temp = People(10)
-    print(temp.get_home_world())
+    print(temp.get_all_jsons())
+    # print(temp.get_home_world())
