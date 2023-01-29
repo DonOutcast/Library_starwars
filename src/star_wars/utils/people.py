@@ -100,8 +100,15 @@ class People(BaseRequest):
         """
         return self.json_data.get("skin_color")
 
+    def get_eye_color(self):
+        """
+            Return a eye color of the people
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("eye_color")
 
 
 if __name__ == "__main__":
     temp = People(10)
-    print(temp.get_skin_color())
+    print(temp.get_eye_color())
