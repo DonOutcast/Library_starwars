@@ -176,7 +176,6 @@ class People(BaseRequest):
 
     def save_image(self, person_name: str, path_to_image) -> bool:
         """Save the image to your directory
-
         :param person_name: The file location and name
         :type person_name: str
         :param path_to_image: A file link to
@@ -202,12 +201,12 @@ class People(BaseRequest):
         soup = BeautifulSoup(response.content, "html.parser")
         return soup.find("p", {"class": "desc"}).text
 
-    # def get_after_photo():
-    #     response = requests.get("https://www.starwars.com/databank/r2-d2")
-    #     soup = BeautifulSoup(response.content, "html.parser")
-    #     soup.find("div", {"class": "rich-text-output"}).find_all("div", {"class": "media-image-inline"})
-    #     for i in soup.find("div", {"class": "rich-text-output"}).find_all("p"):
-    #         print(i.text)
+    def get_after_photo(self):
+        response = requests.get("https://www.starwars.com/databank/r2-d2")
+        soup = BeautifulSoup(response.content, "html.parser")
+        soup.find("div", {"class": "rich-text-output"}).find_all("div", {"class": "media-image-inline"})
+        for i in soup.find("div", {"class": "rich-text-output"}).find_all("p"):
+            print(i.text)
 
     def search_history_photo(self) -> None:
         """
@@ -215,7 +214,6 @@ class People(BaseRequest):
         :return: None
         :type: :obj: `None`
         """
-
         response = requests.get(Config.get_url_star_wars() + self.get_name().replace(" ", "-"))
         soup = BeautifulSoup(response.content, "html.parser")
         for i in soup.find("div", {"class": "rich-text-output"}).find_all("div", {"class": "media-image-inline"}):
@@ -252,7 +250,8 @@ class People(BaseRequest):
 if __name__ == "__main__":
     temp = People(10)
     # print(temp.save_history_photos(""))
-    print(temp.get_description())
+    print(len(temp.get_photos_of_history()))
+    # print(temp.get_description())
     # count = 0
     # for i in search_history_photo():
     #     try:
