@@ -32,6 +32,7 @@ class People(BaseRequest):
         super(People, self).__init__(id_people, Config.get_url_api() + Config.get_people())
         self.image_path = None
         self.id = id_people
+        self.photos_of_history = []
 
     def get_people_json(self):
         """ Return all names and ids of planets of the people
@@ -192,26 +193,71 @@ class People(BaseRequest):
         else:
             return True
 
-    # def get_description():
-    #     response = requests.get("https://www.starwars.com/databank/omega")
-    #     soup = BeautifulSoup(response.content, "html.parser")
-    #     return soup.find("p", {"class": "desc"}).text
+    def get_description(self):
+        """
+        The function search
+        :return:
+        """
+        response = requests.get(Config.get_url_star_wars() + self.get_name().replace(" ", "-"))
+        soup = BeautifulSoup(response.content, "html.parser")
+        return soup.find("p", {"class": "desc"}).text
 
-    # def search_history_photo():
-    #     response = requests.get("https://www.starwars.com/databank/r2-d2")
-    #     soup = BeautifulSoup(response.content, "html.parser")
-    #     # print(soup.find("section", {"id":"ref-1-13"}))
-    #
-    #     # temp = soup.select("#ref-1-9 > div")
-    #     # print(soup.find("div", {"class": "rich-text-output"}).find_all("div", {"class": "media-image-inline"}))
-    #     for i in soup.find("div", {"class": "rich-text-output"}).find_all("div", {"class": "media-image-inline"}):
-    #         print(i.find("img").get("src"))
-
-if __name__ == "__main__":
     # def get_after_photo():
     #     response = requests.get("https://www.starwars.com/databank/r2-d2")
     #     soup = BeautifulSoup(response.content, "html.parser")
-    #     soup.find("div", {"class": "rich-text-output"}).find_all("div", {"class": "media-image-inline"}))
+    #     soup.find("div", {"class": "rich-text-output"}).find_all("div", {"class": "media-image-inline"})
     #     for i in soup.find("div", {"class": "rich-text-output"}).find_all("p"):
     #         print(i.text)
 
+    def search_history_photo(self) -> None:
+        """
+        The function search all photo in history block about a people
+        :return: None
+        :type: :obj: `None`
+        """
+
+        response = requests.get(Config.get_url_star_wars() + self.get_name().replace(" ", "-"))
+        soup = BeautifulSoup(response.content, "html.parser")
+        for i in soup.find("div", {"class": "rich-text-output"}).find_all("div", {"class": "media-image-inline"}):
+            self.photos_of_history.append(i.find("img").get("src"))
+
+    def get_photos_of_history(self) -> list:
+        """
+        Return all photos at history people in url path
+        :return: Url paths
+        :type: :obj: `list`
+        """
+        self.search_history_photo()
+        return self.photos_of_history
+
+    def save_history_photos(self, path) -> bool:
+        """
+        The function save all photos at block history
+        :return: None
+        :type: :obj: `None`
+        """
+        count = 0
+        path_photo = ""
+        for i in self.get_photos_of_history():
+            path_photo = path + self.get_name() + str(count) + ".png"
+            try:
+                with open(path_photo, "wb") as f:
+                    f.write(requests.get(i).content)
+            except Exception as error:
+                print(error)
+            count += 1
+        return os.path.exists(path_photo)
+
+
+if __name__ == "__main__":
+    temp = People(10)
+    # print(temp.save_history_photos(""))
+    print(temp.get_description())
+    # count = 0
+    # for i in search_history_photo():
+    #     try:
+    #         with open(str(count) + ".png", "wb") as f:
+    #             f.write(requests.get(i).content)
+    #     except Exception as error:
+    #         print(error)
+    #     count += 1

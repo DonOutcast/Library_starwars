@@ -72,6 +72,9 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(people.get_date_edited(), "2014-12-20T21:17:50.325000Z", "should 2014-12-20T21:17:50.325000Z")
         self.assertEqual(people.get_vehicles(), ['Tribubble bongo'], "should ['Tribubble bongo']")
         self.assertEqual(people.get_home_world(), "Stewjon", "should Stewjon")
+        self.assertEqual(people.get_description(),
+                         "A legendary Jedi Master, Obi-Wan Kenobi was a noble man and gifted in the ways of the Force. He trained Anakin Skywalker, served as a general in the Republic Army during the Clone Wars, and guided Luke Skywalker as a mentor.",
+                         "A legendary Jedi Master, Obi-Wan Kenobi was a noble man and gifted in the ways of the Force. He trained Anakin Skywalker, served as a general in the Republic Army during the Clone Wars, and guided Luke Skywalker as a mentor.")
 
 
 if __name__ == "__main__":
