@@ -21,11 +21,11 @@ class People(BaseRequest):
             :caption: Creating instance of StarWars
 
             from star_wars import star_wars
-            jedi = StarWars
+            people = People(2)
             # and use jedi methods.
 
-            :param id_starship: of a starship, should be obtained from StarWars
-            :type id_starship: :obj: `int`
+            :param: id_people of a people, should be obtained from StarWars
+            :type id_people: :obj: `int`
         """
 
     def __init__(self, id_people: int):
@@ -247,16 +247,3 @@ class People(BaseRequest):
         return os.path.exists(path_photo)
 
 
-if __name__ == "__main__":
-    temp = People(10)
-    # print(temp.save_history_photos(""))
-    print(len(temp.get_photos_of_history()))
-    # print(temp.get_description())
-    # count = 0
-    # for i in search_history_photo():
-    #     try:
-    #         with open(str(count) + ".png", "wb") as f:
-    #             f.write(requests.get(i).content)
-    #     except Exception as error:
-    #         print(error)
-    #     count += 1
