@@ -43,7 +43,8 @@ class History:
     def get_after_photo(self):
         self.soup.find("div", {"class": "rich-text-output"}).find_all("div", {"class": "media-image-inline"})
         for i in self.soup.find("div", {"class": "rich-text-output"}).find_all("p"):
-            self.history_text_after_photo.append(i.text)
+            if i.text != "":
+                self.history_text_after_photo.append(i.text)
         return self.history_text_after_photo
 
     def search_history_photo(self) -> None:
@@ -85,4 +86,4 @@ class History:
 
 if __name__ == "__main__":
     temp = History("Obi-Wan Kenobi")
-    print(temp.get_description())
+    print(len(temp.get_after_photo()))
