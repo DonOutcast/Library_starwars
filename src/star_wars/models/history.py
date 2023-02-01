@@ -65,7 +65,7 @@ class History:
         self.search_history_photo()
         return self.photos_of_history
 
-    def save_history_photos(self, path) -> bool:
+    def save_history_photos(self, path="") -> bool:
         """
         The function save all photos at block history
         :return: None
@@ -73,17 +73,19 @@ class History:
         """
         count = 0
         path_photo = ""
+        result = []
         for i in self.get_photos_of_history():
             path_photo = path + self.name_for_searching + str(count) + ".png"
             try:
                 with open(path_photo, "wb") as f:
                     f.write(requests.get(i).content)
+                    result.append(os.path.exists(path_photo))
             except Exception as error:
                 print(error)
             count += 1
-        return os.path.exists(path_photo)
+        return result
 
 
 if __name__ == "__main__":
     temp = History("Obi-Wan Kenobi")
-    print(temp.get_description())
+    print(temp.save_history_photos(""))
