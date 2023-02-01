@@ -86,4 +86,4 @@ class History:
 
 if __name__ == "__main__":
     temp = History("Obi-Wan Kenobi")
-    print(len(temp.get_after_photo()))
+    print(temp.get_description())
