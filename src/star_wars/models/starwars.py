@@ -98,12 +98,3 @@ class StarWars:
          :type: dict[str, int]
         """
         return self._get_response(self.__url_starships, name_key="name")
-
-
-if __name__ == "__main__":
-    temp = StarWars()
-    print(temp.get_people_names())
-    print(temp.get_starships_names())
-    print(temp.get_planets_names())
-    print(temp.get_vehicles_names())
-    print(temp.get_species_names())
