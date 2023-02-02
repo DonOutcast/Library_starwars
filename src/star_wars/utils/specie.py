@@ -131,4 +131,5 @@ class Specie(BaseRequest):
 
 if __name__ == "__main__":
     temp = Specie(2)
-    print(temp.get_language())
+    print(temp.get_date_created())
+    print(temp.get_date_edited())
