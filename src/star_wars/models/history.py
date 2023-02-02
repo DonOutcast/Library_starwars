@@ -65,7 +65,7 @@ class History:
         self.search_history_photo()
         return self.photos_of_history
 
-    def save_history_photos(self, path="") -> bool:
+    def save_history_photos(self, path="") -> list[bool]:
         """
         The function save all photos at block history
         :return: None
