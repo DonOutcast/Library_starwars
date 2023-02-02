@@ -112,6 +112,22 @@ class Specie(BaseRequest):
         """
         return self.json_data.get("language")
 
+    def get_date_created(self) -> str:
+        """
+        Return a date for created the specie
+        :return: Date
+        :type: :obj: `str`
+        """
+        return self.json_data.get("created")
+
+    def get_date_edited(self):
+        """
+        Return a date for edited the specie
+        :return: Date
+        :type: :obj: `str`
+        """
+        return self.json_data.get("edited")
+
 
 if __name__ == "__main__":
     temp = Specie(2)
