@@ -21,6 +21,7 @@ jobs:
           python-version: ${{ matrix.python-version }}
   install:
     needs: build
+    runs-on: ubuntu-20.04
     steps:
       - name: Install deps
         run: | 
@@ -28,6 +29,7 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
   test:
     needs: install
+    runs-on: ubuntu-20.04
     steps:
       - name: Test orig
         run: python -m unittest src/tests_star/test_star_wars.py
