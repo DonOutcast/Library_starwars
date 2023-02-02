@@ -80,7 +80,23 @@ class Specie(BaseRequest):
         """
         return self.json_data.get("skin_colors")
 
+    def get_hair_colors(self):
+        """
+            Return  hair colors of the specie
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("hair_colors")
+
+    def get_eye_colors(self):
+        """
+            Return  eye colors of the specie
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("eye_colors")
+
 
 if __name__ == "__main__":
     temp = Specie(2)
-    print(temp.get_skin_colors())
+    print(temp.get_hair_colors())

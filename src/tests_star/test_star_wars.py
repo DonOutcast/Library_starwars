@@ -266,6 +266,8 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(specie.get_designation(), "sentient", "should sentient")
         self.assertEqual(specie.get_average_height(), "n/a", "should n/a")
         self.assertEqual(specie.get_skin_colors(), "n/a", "should n/a")
+        self.assertEqual(specie.get_hair_colors(), "n/a", "should n/a")
+        self.assertEqual(specie.get_eye_colors(), "n/a", "should n/a")
 
 if __name__ == "__main__":
     unittest.main()
