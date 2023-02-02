@@ -270,6 +270,7 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(specie.get_eye_colors(), "n/a", "should n/a")
         self.assertEqual(specie.get_average_lifespan(), "indefinite", "should indefinite")
         self.assertEqual(specie.get_language(), "n/a", "should n/a")
+        self.assertEqual(specie.get_home_world(), None, "should None")
         self.assertEqual(specie.get_date_created(), "2014-12-10T15:16:16.259000Z", "should 2014-12-10T15:16:16.259000Z")
         self.assertEqual(specie.get_date_edited(), "2014-12-20T21:36:42.139000Z", "should 2014-12-20T21:36:42.139000Z")
 

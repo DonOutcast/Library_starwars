@@ -165,7 +165,9 @@ class People(BaseRequest):
         :return: Date
         :type: :obj: `str`
         """
-        home = requests.get(self.json_data.get("homeworld")).json().get("name")
+        home = None
+        if self.json_data.get("homeworld") is not None:
+            home = requests.get(self.json_data.get("homeworld")).json().get("name")
         return home
 
     @staticmethod

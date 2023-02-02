@@ -33,14 +33,14 @@ class Specie(BaseRequest):
         super(Specie, self).__init__(id_specie, Config.get_url_api() + Config.get_species())
         self.id = id_specie
 
-    def get_specie_json(self):
+    def get_specie_json(self) -> str:
         """ Return all information about a specie
          :return: Response to url in a dictionary
          :type: dict[str, int]
         """
         return self.json_data
 
-    def get_name(self):
+    def get_name(self) -> str:
         """
             Return a name of the specie
             :return: Name
@@ -48,7 +48,7 @@ class Specie(BaseRequest):
         """
         return self.json_data.get("name")
 
-    def get_classification(self):
+    def get_classification(self) -> str:
         """
             Return a classification of the specie
             :return: Name
@@ -56,7 +56,7 @@ class Specie(BaseRequest):
         """
         return self.json_data.get("classification")
 
-    def get_designation(self):
+    def get_designation(self) -> str:
         """
             Return a designation of the specie
             :return: Name
@@ -64,7 +64,7 @@ class Specie(BaseRequest):
         """
         return self.json_data.get("designation")
 
-    def get_average_height(self):
+    def get_average_height(self) -> str:
         """
             Return  average height of the specie
             :return: Name
@@ -72,7 +72,7 @@ class Specie(BaseRequest):
         """
         return self.json_data.get("average_height")
 
-    def get_skin_colors(self):
+    def get_skin_colors(self) -> str:
         """
             Return  skin colors of the specie
             :return: Name
@@ -80,7 +80,7 @@ class Specie(BaseRequest):
         """
         return self.json_data.get("skin_colors")
 
-    def get_hair_colors(self):
+    def get_hair_colors(self) -> str:
         """
             Return  hair colors of the specie
             :return: Name
@@ -88,7 +88,7 @@ class Specie(BaseRequest):
         """
         return self.json_data.get("hair_colors")
 
-    def get_eye_colors(self):
+    def get_eye_colors(self) -> str:
         """
             Return  eye colors of the specie
             :return: Name
@@ -96,7 +96,7 @@ class Specie(BaseRequest):
         """
         return self.json_data.get("eye_colors")
 
-    def get_average_lifespan(self):
+    def get_average_lifespan(self) -> str:
         """
             Return  average lifespan of the specie
             :return: Name
@@ -104,13 +104,24 @@ class Specie(BaseRequest):
         """
         return self.json_data.get("average_lifespan")
 
-    def get_language(self):
+    def get_language(self) -> str:
         """
             Return  language of the specie
             :return: Name
             :type: :obj: `str`
         """
         return self.json_data.get("language")
+
+    def get_home_world(self):
+        """
+        Return a home world the people
+        :return: Date
+        :type: :obj: `str`
+        """
+        home = None
+        if self.json_data.get("homeworld") is not None:
+            home = requests.get(self.json_data.get("homeworld")).json().get("name")
+        return home
 
     def get_date_created(self) -> str:
         """
@@ -120,7 +131,7 @@ class Specie(BaseRequest):
         """
         return self.json_data.get("created")
 
-    def get_date_edited(self):
+    def get_date_edited(self) -> str:
         """
         Return a date for edited the specie
         :return: Date
@@ -131,5 +142,5 @@ class Specie(BaseRequest):
 
 if __name__ == "__main__":
     temp = Specie(2)
-    print(temp.get_date_created())
-    print(temp.get_date_edited())
+    # print(temp.get_specie_json())
+    print(temp.get_home_world())
