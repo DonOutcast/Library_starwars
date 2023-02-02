@@ -138,9 +138,26 @@ class Specie(BaseRequest):
         :type: :obj: `str`
         """
         return self.json_data.get("edited")
+    # def get_pilots(self) -> list[Any]:
+    #     """
+    #         Return all pilots of the starships
+    #         :return: Names of all pilots if haves
+    #         :type: :obj: `List[str]`
+    #     """
+    #     pilot_names = self._get_items_of_json("starships", "name", Config.get_url_api() + Config.get_people())
+    #     return pilot_names
+
+    def get_films(self) -> list[Any]:
+        """
+            Return all films with the starship
+            :return: Names of all films with the starship
+            :type: :obj: `list[str]`
+        :return:
+        """
+        films_names = self._get_items_of_json("starships", "title", Config.get_url_api() + Config.get_films())
+        return films_names
 
 
 if __name__ == "__main__":
     temp = Specie(2)
-    # print(temp.get_specie_json())
-    print(temp.get_home_world())
+    print(temp.get_films())
