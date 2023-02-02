@@ -72,6 +72,15 @@ class Specie(BaseRequest):
         """
         return self.json_data.get("average_height")
 
+    def get_skin_colors(self):
+        """
+            Return  skin colors of the specie
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("skin_colors")
+
+
 if __name__ == "__main__":
     temp = Specie(2)
-    print(temp.get_average_height())
+    print(temp.get_skin_colors())
