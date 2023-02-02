@@ -262,6 +262,7 @@ class StarWarsTest(unittest.TestCase):
                          "'url': 'https://swapi.dev/api/species/2/'}"
                          )
         self.assertEqual(specie.get_name(), "Droid", "should Droid")
+        self.assertEqual(specie.get_classification(), "artificial", "should artificial")
 
 
 if __name__ == "__main__":
