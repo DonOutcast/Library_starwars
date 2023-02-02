@@ -55,7 +55,8 @@ class History:
         :type: :obj: `None`
         """
         for i in self.soup.find("div", {"class": "rich-text-output"}).find_all("div", {"class": "media-image-inline"}):
-            self.photos_of_history.append(i.find("img").get("src"))
+            if i.find("img").get("src") not in self.photos_of_history:
+                self.photos_of_history.append(i.find("img").get("src"))
 
     def get_photos_of_history(self) -> list:
         """
@@ -109,5 +110,6 @@ class History:
 
 if __name__ == "__main__":
     temp = History("Leia Organa")
+    print(len(temp.get_photos_of_history()))
     print(len(temp.get_byte_code_of_photos()))
     # print(temp.save_history_photos(""))
