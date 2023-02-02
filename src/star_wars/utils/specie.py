@@ -58,12 +58,20 @@ class Specie(BaseRequest):
 
     def get_designation(self):
         """
-            Return a classification of the specie
+            Return a designation of the specie
             :return: Name
             :type: :obj: `str`
         """
         return self.json_data.get("designation")
 
+    def get_average_height(self):
+        """
+            Return  average height of the specie
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("average_height")
+
 if __name__ == "__main__":
     temp = Specie(2)
-    print(temp.get_designation())
+    print(temp.get_average_height())
