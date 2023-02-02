@@ -147,15 +147,15 @@ class StarWarsTest(unittest.TestCase):
     #                      'Kaleesh': '36', "Pau'an": '37'}""")
 
     def test_history(self):
-        history = History("Obi-Wan Kenobi")
-        self.assertEqual(history.name_for_searching, "Obi-Wan-Kenobi", "shoud Obi-Wan-Kenobi")
-        self.assertEqual(len(history.get_after_photo()), 15, "should 15")
-        self.assertEqual(len(history.get_photos_of_history()), 10, "should 10")
+        history = History("Leia Organa")
+        self.assertEqual(history.name_for_searching, "Leia-Organa", "shoud Leia-Organa")
+        self.assertEqual(len(history.get_after_photo()), 22, "should 22")
+        self.assertEqual(len(history.get_photos_of_history()), 14, "should 14")
         self.assertEqual(history.get_description(),
                          "A legendary Jedi Master, Obi-Wan Kenobi was a noble man and gifted in the ways of the Force. He trained Anakin Skywalker, served as a general in the Republic Army during the Clone Wars, and guided Luke Skywalker as a mentor.",
                          "should A legendary Jedi Master, Obi-Wan Kenobi was a noble man and gifted in the ways of the Force. He trained Anakin Skywalker, served as a general in the Republic Army during the Clone Wars, and guided Luke Skywalker as a mentor.")
-        self.assertEqual(history.save_history_photos(), [True, True, True, True, True, True, True, True, True, True],
-                         "should [True, True, True, True, True, True, True, True, True, True]")
+        self.assertEqual(history.save_history_photos(), [True, True, True, True, True, True, True, True, True, True, True, True, True, True],
+                         "should [True, True, True, True, True, True, True, True, True, True, True, True, True, True]")
 
     # def test_starships(self):
     #     starship = Starship(10)

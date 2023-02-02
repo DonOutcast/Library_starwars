@@ -87,5 +87,7 @@ class History:
 
 
 if __name__ == "__main__":
-    temp = History("Obi-Wan Kenobi")
-    print(temp.save_history_photos(""))
+    temp = History("Leia Organa")
+    print(len(temp.get_after_photo()))
+    print(len(temp.get_photos_of_history()))
+    # print(temp.save_history_photos(""))
