@@ -261,6 +261,7 @@ class StarWarsTest(unittest.TestCase):
                          "'2014-12-10T15:16:16.259000Z', 'edited': '2014-12-20T21:36:42.139000Z', "
                          "'url': 'https://swapi.dev/api/species/2/'}"
                          )
+        self.assertEqual(specie.get_name(), "Droid", "should Droid")
 
 
 if __name__ == "__main__":

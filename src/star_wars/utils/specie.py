@@ -34,13 +34,29 @@ class Specie(BaseRequest):
         self.id = id_specie
 
     def get_specie_json(self):
-        """ Return all names and ids of planets of the people
+        """ Return all information about a specie
          :return: Response to url in a dictionary
          :type: dict[str, int]
         """
         return self.json_data
 
+    def get_name(self):
+        """
+            Return a name of the specie
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("name")
+
+    def get_classification(self):
+        """
+            Return a classification of the specie
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("classification")
+
 
 if __name__ == "__main__":
     temp = Specie(2)
-    print(temp.get_specie_json())
+    print(temp.get_classification())

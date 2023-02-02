@@ -35,7 +35,7 @@ class Starship(BaseRequest):
         self.url_starship = Config.get_url_wiki()
 
     def get_starship_json(self):
-        """ Return all names and ids of planets
+        """ Return all  information about a planet
          :return: Response to url in a dictionary
          :type: dict[str, int]
         """
