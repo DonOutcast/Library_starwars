@@ -13,7 +13,7 @@ class Config:
     """The class for base settings of parser"""
     __base_url_api: Optional[str] = "https://swapi.dev/api/"
     __base_url_star_wars: Optional[str] = "https://www.starwars.com/databank/"
-    __base_url_starships: Optional[str] = "https://starwars.fandom.com/wiki/"
+    __base_url_wiki: Optional[str] = "https://starwars.fandom.com/wiki/"
     __people: Optional[str] = "people"
     __planets: Optional[str] = "planets"
     __starships: Optional[str] = "starships"
@@ -38,12 +38,12 @@ class Config:
         return Config.__base_url_star_wars
 
     @staticmethod
-    def get_url_starships() -> str:
+    def get_url_wiki() -> str:
         """Getting a base url starships
         :returns: Url
         :rtype: str
         """
-        return Config.__base_url_starships
+        return Config.__base_url_wiki
 
     @staticmethod
     def get_people() -> str:

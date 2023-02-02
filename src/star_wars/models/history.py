@@ -106,10 +106,3 @@ class History:
         """
         self._generation_byte_code_photos()
         return self.byte_code_of_photos
-
-
-if __name__ == "__main__":
-    temp = History("Leia Organa")
-    print(len(temp.get_photos_of_history()))
-    print(len(temp.get_byte_code_of_photos()))
-    # print(temp.save_history_photos(""))

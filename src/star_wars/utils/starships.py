@@ -32,7 +32,7 @@ class Starship(BaseRequest):
         super(Starship, self).__init__(id_starship, Config.get_url_api() + Config.get_starships())
         self.image_path = None
         self.id = id_starship
-        self.url_starship = Config.get_url_starships()
+        self.url_starship = Config.get_url_wiki()
 
     def get_starship_json(self):
         """ Return all names and ids of planets
@@ -201,7 +201,7 @@ class Starship(BaseRequest):
         """
         Return a photo of the starship
             :return: `obj` str
-            :type:
+            :type: :obj: `str`
         """
         my_response = requests.get(self.url_starship + name.replace(" ", "_"))
         my_soup = BeautifulSoup(my_response.content, "lxml").select("div.mw-parser-output > p")

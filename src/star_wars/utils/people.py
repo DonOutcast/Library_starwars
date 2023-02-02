@@ -7,6 +7,7 @@ try:
     from typing import List, Any
     from bs4 import BeautifulSoup
     from src.star_wars.settings import Config
+    from src.star_wars.models.history import History
     from src.star_wars.utils.baserequest import BaseRequest
 except (Exception,) as e:
     print(sys.exc_info())
@@ -14,7 +15,7 @@ except (Exception,) as e:
 
 class People(BaseRequest):
     """
-        Class for all names and ids in world Star Wars.
+        Class for all people in world Star Wars.
             Usage:
 
         .. code-block:: python3
@@ -33,6 +34,7 @@ class People(BaseRequest):
         self.image_path = None
         self.id = id_people
         self.photos_of_history = []
+        self.__history = History(self.get_name())
 
     def get_people_json(self):
         """ Return all names and ids of planets of the people
@@ -192,32 +194,15 @@ class People(BaseRequest):
         else:
             return True
 
-    def get_description(self):
+    def get_description(self) -> list[Any]:
         """
         The function search
         :return:
         """
-        response = requests.get(Config.get_url_star_wars() + self.get_name().replace(" ", "-"))
-        soup = BeautifulSoup(response.content, "html.parser")
-        return soup.find("p", {"class": "desc"}).text
+        return self.__history.get_description()
 
-    def get_after_photo(self):
-        response = requests.get("https://www.starwars.com/databank/r2-d2")
-        soup = BeautifulSoup(response.content, "html.parser")
-        soup.find("div", {"class": "rich-text-output"}).find_all("div", {"class": "media-image-inline"})
-        for i in soup.find("div", {"class": "rich-text-output"}).find_all("p"):
-            print(i.text)
-
-    def search_history_photo(self) -> None:
-        """
-        The function search all photo in history block about a people
-        :return: None
-        :type: :obj: `None`
-        """
-        response = requests.get(Config.get_url_star_wars() + self.get_name().replace(" ", "-"))
-        soup = BeautifulSoup(response.content, "html.parser")
-        for i in soup.find("div", {"class": "rich-text-output"}).find_all("div", {"class": "media-image-inline"}):
-            self.photos_of_history.append(i.find("img").get("src"))
+    def get_after_photo(self) -> list[Any]:
+        return self.__history.get_after_photo()
 
     def get_photos_of_history(self) -> list:
         """
@@ -225,25 +210,16 @@ class People(BaseRequest):
         :return: Url paths
         :type: :obj: `list`
         """
-        self.search_history_photo()
-        return self.photos_of_history
+        return self.__history.get_photos_of_history()
 
-    def save_history_photos(self, path) -> bool:
+    def save_history_photos(self, path="") -> list[bool]:
         """
         The function save all photos at block history
         :return: None
         :type: :obj: `None`
         """
-        count = 0
-        path_photo = ""
-        for i in self.get_photos_of_history():
-            path_photo = path + self.get_name() + str(count) + ".png"
-            try:
-                with open(path_photo, "wb") as f:
-                    f.write(requests.get(i).content)
-            except Exception as error:
-                print(error)
-            count += 1
-        return os.path.exists(path_photo)
+        return self.__history.save_history_photos(path)
 
-
+# if __name__ == "__main__":
+#     temp = People(2)
+# print(temp.save_image(temp.get_name(), temp.get_url_image(temp.get_name())))
