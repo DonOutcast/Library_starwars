@@ -162,3 +162,4 @@ class Specie(BaseRequest):
 if __name__ == "__main__":
     temp = Specie(2)
     print(temp.get_people())
+    print(temp.get_films())

@@ -15,7 +15,7 @@ except (Exception,) as e:
 
 class History:
 
-    def __init__(self, name_for_searching):
+    def __init__(self, name_for_searching: str):
         self.name_for_searching = self.replace_name(name_for_searching)
         self.photos_of_history = []
         self.history_text_after_photo = []
