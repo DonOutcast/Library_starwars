@@ -19,6 +19,7 @@ class History:
         self.name_for_searching = self.replace_name(name_for_searching)
         self.photos_of_history = []
         self.history_text_after_photo = []
+        self.byte_code_of_photos = []
         response = requests.get(Config.get_url_star_wars() + self.name_for_searching)
         self.soup = BeautifulSoup(response.content, "html.parser")
 
@@ -72,7 +73,6 @@ class History:
         :type: :obj: `None`
         """
         count = 0
-        path_photo = ""
         result = []
         for i in self.get_photos_of_history():
             path_photo = path + self.name_for_searching + str(count) + ".png"
@@ -85,8 +85,29 @@ class History:
             count += 1
         return result
 
+    def _generation_byte_code_photos(self) -> None:
+        """
+        The function a generation all byte code of photo
+        :return: None
+        :type: :obj: `None`
+        """
+        try:
+            for bytes_photo in self.get_photos_of_history():
+                self.byte_code_of_photos.append(requests.get(bytes_photo).content)
+        except Exception as error:
+            print(error)
+
+    def get_byte_code_of_photos(self) -> list[Any]:
+        """
+        Retturn a byte  code of photo
+        :return: Bytes
+        :type: :obj: `list[Any]`
+        """
+        self._generation_byte_code_photos()
+        return self.byte_code_of_photos
+
 
 if __name__ == "__main__":
     temp = History("Leia Organa")
-    print(temp.get_description())
+    print(len(temp.get_byte_code_of_photos()))
     # print(temp.save_history_photos(""))
