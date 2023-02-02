@@ -273,8 +273,14 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(specie.get_home_world(), None, "should None")
         self.assertEqual(specie.get_date_created(), "2014-12-10T15:16:16.259000Z", "should 2014-12-10T15:16:16.259000Z")
         self.assertEqual(specie.get_date_edited(), "2014-12-20T21:36:42.139000Z", "should 2014-12-20T21:36:42.139000Z")
-        self.assertEqual(specie.get_films(), ['A New Hope', 'Return of the Jedi', 'Revenge of the Sith'],
-                         "should ['A New Hope', 'Return of the Jedi', 'Revenge of the Sith']")
+        self.assertEqual(specie.get_films(),
+                         ['A New Hope', 'The Empire Strikes Back', 'Return of the Jedi', 'The Phantom Menace',
+                          'Attack of the Clones', 'Revenge of the Sith']
+                         ,
+                         "should ['A New Hope', 'The Empire Strikes Back', 'Return of the Jedi', 'The Phantom "
+                         "Menace', 'Attack of the Clones', 'Revenge of the Sith']")
+        self.assertEqual(specie.get_people(), ['C-3PO', 'R2-D2', 'R5-D4', 'IG-88'],
+                         "should ['C-3PO', 'R2-D2', 'R5-D4', 'IG-88']")
 
 
 if __name__ == "__main__":

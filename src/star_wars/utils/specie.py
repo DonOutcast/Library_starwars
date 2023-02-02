@@ -138,14 +138,15 @@ class Specie(BaseRequest):
         :type: :obj: `str`
         """
         return self.json_data.get("edited")
-    # def get_pilots(self) -> list[Any]:
-    #     """
-    #         Return all pilots of the starships
-    #         :return: Names of all pilots if haves
-    #         :type: :obj: `List[str]`
-    #     """
-    #     pilot_names = self._get_items_of_json("starships", "name", Config.get_url_api() + Config.get_people())
-    #     return pilot_names
+
+    def get_people(self) -> list[Any]:
+        """
+            Return all pilots of the starships
+            :return: Names of all pilots if haves
+            :type: :obj: `List[str]`
+        """
+        pilot_names = self._get_items_of_json("species", "name", Config.get_url_api() + Config.get_people())
+        return pilot_names
 
     def get_films(self) -> list[Any]:
         """
@@ -154,10 +155,10 @@ class Specie(BaseRequest):
             :type: :obj: `list[str]`
         :return:
         """
-        films_names = self._get_items_of_json("starships", "title", Config.get_url_api() + Config.get_films())
+        films_names = self._get_items_of_json("species", "title", Config.get_url_api() + Config.get_films())
         return films_names
 
 
 if __name__ == "__main__":
     temp = Specie(2)
-    print(temp.get_films())
+    print(temp.get_people())
