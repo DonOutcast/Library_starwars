@@ -96,7 +96,15 @@ class Specie(BaseRequest):
         """
         return self.json_data.get("eye_colors")
 
+    def get_average_lifespan(self):
+        """
+            Return  average lifespan of the specie
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("average_lifespan")
+
 
 if __name__ == "__main__":
     temp = Specie(2)
-    print(temp.get_hair_colors())
+    print(temp.get_average_lifespan())
