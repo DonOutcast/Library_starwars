@@ -56,7 +56,14 @@ class Specie(BaseRequest):
         """
         return self.json_data.get("classification")
 
+    def get_designation(self):
+        """
+            Return a classification of the specie
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("designation")
 
 if __name__ == "__main__":
     temp = Specie(2)
-    print(temp.get_classification())
+    print(temp.get_designation())

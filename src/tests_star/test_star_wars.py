@@ -263,6 +263,7 @@ class StarWarsTest(unittest.TestCase):
                          )
         self.assertEqual(specie.get_name(), "Droid", "should Droid")
         self.assertEqual(specie.get_classification(), "artificial", "should artificial")
+        self.assertEqual(specie.get_designation(), "sentient", "should sentient")
 
 
 if __name__ == "__main__":
