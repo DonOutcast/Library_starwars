@@ -104,7 +104,15 @@ class Specie(BaseRequest):
         """
         return self.json_data.get("average_lifespan")
 
+    def get_language(self):
+        """
+            Return  language of the specie
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("language")
+
 
 if __name__ == "__main__":
     temp = Specie(2)
-    print(temp.get_average_lifespan())
+    print(temp.get_language())
