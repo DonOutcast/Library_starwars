@@ -19,11 +19,15 @@ jobs:
         uses: actions/setup-python@v4
         with:
           python-version: ${{ matrix.python-version }}
-      - name: Clear png
-        run: rm -rf *.png
+  install:
+    needs: build
+    steps:
       - name: Install deps
         run: | 
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+  test:
+    needs: install
+    steps:
       - name: Test orig
         run: python -m unittest src/tests_star/test_star_wars.py
