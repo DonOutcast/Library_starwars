@@ -13,7 +13,7 @@ except (Exception,) as e:
 
 class Planet(BaseRequest):
     """
-            Class for all names and ids in world Star Wars.
+            Class for all planets in world Star Wars.
                 Usage:
 
             .. code-block:: python3
@@ -23,6 +23,19 @@ class Planet(BaseRequest):
                 planet = Planet(1)
                 # and use jedi methods.
 
-                :param id_starship: of a starship, should be obtained from StarWars
-                :type id_starship: :obj: `int`
+                :param id_planet: of a starship, should be obtained from StarWars
+                :type id_planet: :obj: `int`
             """
+    def __init__(self, id_planet):
+        super(Planet, self).__init__(id_planet, Config.get_url_api() + Config.get_species())
+        self.id = id_planet
+
+    def get_planet_json(self) -> str:
+        """ Return all information about a planet
+         :return: Response to url in a dictionary
+         :type: dict[str, int]
+        """
+        return self.json_data
+if __name__ == "__main__":
+    planet = Planet(9)
+    print(planet.get_planet_json())

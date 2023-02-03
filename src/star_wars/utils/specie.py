@@ -15,7 +15,7 @@ except (Exception,) as e:
 
 class Specie(BaseRequest):
     """
-        Class for all specie world Star Wars.
+        Class for all specie in world Star Wars.
             Usage:
 
         .. code-block:: python3
