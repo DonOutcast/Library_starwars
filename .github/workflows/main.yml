@@ -25,4 +25,4 @@ jobs:
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
       - name: Test orig
 #        run: python -m unittest src/tests_star/test_star_wars.py
-        run: python -m unittest src/test_star/test_planet.py
+        run: python -m unittest src/tests_star/test_planet.py
