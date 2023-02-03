@@ -27,7 +27,7 @@ class Planet(BaseRequest):
                 :type id_planet: :obj: `int`
             """
     def __init__(self, id_planet):
-        super(Planet, self).__init__(id_planet, Config.get_url_api() + Config.get_species())
+        super(Planet, self).__init__(id_planet, Config.get_url_api() + Config.get_planets())
         self.id = id_planet
 
     def get_planet_json(self) -> str:
@@ -44,6 +44,16 @@ class Planet(BaseRequest):
         """
         return self.json_data.get("name")
 
+    def get_rotation_period(self) -> str:
+        """
+            Return a name of the rotation period in planet
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("rotation_period")
+
 if __name__ == "__main__":
     planet = Planet(9)
+    print(planet.get_planet_json())
     print(planet.get_name())
+    print(planet.get_rotation_period())
