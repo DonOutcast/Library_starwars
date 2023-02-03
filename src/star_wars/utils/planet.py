@@ -59,6 +59,13 @@ class Planet(BaseRequest):
         """
         return self.json_data.get("orbital_period")
 
+    def get_diameter(self) -> str:
+        """
+            Return a  diameter of planet
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("diameter")
 if __name__ == "__main__":
     planet = Planet(9)
-    print(planet.get_orbital_period())
+    print(planet.get_diameter())
