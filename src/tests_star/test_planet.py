@@ -16,3 +16,4 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(planet.get_gravity(), "1 standard", "should 1 standard")
         self.assertEqual(planet.get_terrain(), "cityscape, mountains", "should cityscape, mountains")
         self.assertEqual(planet.get_surface_water(), "unknown", "should unknown")
+        self.assertEqual(planet.get_population(), "1000000000000", "should 1000000000000")

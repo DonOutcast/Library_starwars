@@ -97,6 +97,14 @@ class Planet(BaseRequest):
             :type: :obj: `str`
         """
         return self.json_data.get("surface_water")
+
+    def get_population(self) -> str:
+        """
+            Return  population of planet
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("population")
 if __name__ == "__main__":
     planet = Planet(9)
-    print(planet.get_surface_water())
+    print(planet.get_population())
