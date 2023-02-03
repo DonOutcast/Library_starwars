@@ -36,6 +36,14 @@ class Planet(BaseRequest):
          :type: dict[str, int]
         """
         return self.json_data
+    def get_name(self) -> str:
+        """
+            Return a name of the planet
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("name")
+
 if __name__ == "__main__":
     planet = Planet(9)
-    print(planet.get_planet_json())
+    print(planet.get_name())
