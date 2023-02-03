@@ -61,7 +61,13 @@ class BaseRequest:
                 raise ResourceDoesNotExists
             json_data = json.loads(my_response.content)
             for resource in json_data["results"]:
+                # print(resource)
+                # exit()
                 for starship in resource.get(key_class):
+                    print(resource)
+                    print(key_class)
+                    print(starship)
+                    exit()
                     if starship.split("/")[-2] == str(self.id):
                         names.append(resource.get(key_tag))
             if bool(json_data.get("next")):

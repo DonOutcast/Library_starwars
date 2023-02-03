@@ -105,6 +105,27 @@ class Planet(BaseRequest):
             :type: :obj: `str`
         """
         return self.json_data.get("population")
+
+    def get_residents(self) -> list[Any]:
+        """
+            Return  residents of planet
+            :return: Name
+            :type: :obj: `str`
+        """
+        residents_names = self._get_items_of_json("homeworld", "name", Config.get_url_api() + Config.get_people())
+        return residents_names
+
+    def get_films(self) -> list[Any]:
+        """
+            Return all films with the starship
+            :return: Names of all films with the starship
+            :type: :obj: `list[str]`
+        :return:
+        """
+        films_names = self._get_items_of_json("planets", "title", Config.get_url_api() + Config.get_films())
+        return films_names
+
 if __name__ == "__main__":
     planet = Planet(9)
-    print(planet.get_population())
+    print(planet.get_residents())
+    # print(planet.get_films())
