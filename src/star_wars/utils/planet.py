@@ -66,6 +66,14 @@ class Planet(BaseRequest):
             :type: :obj: `str`
         """
         return self.json_data.get("diameter")
+
+    def get_climate(self) -> str:
+        """
+            Return a  diameter of planet
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("climate")
 if __name__ == "__main__":
     planet = Planet(9)
-    print(planet.get_diameter())
+    print(planet.get_climate())

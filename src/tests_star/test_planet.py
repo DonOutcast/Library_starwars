@@ -12,3 +12,4 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(planet.get_rotation_period(), "24", "should 24")
         self.assertEqual(planet.get_orbital_period(), "368", "should 368")
         self.assertEqual(planet.get_diameter(), "12240", "should 12240")
+        self.assertEqual(planet.get_climate(), "temperate", "should temperate")
