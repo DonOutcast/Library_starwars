@@ -14,3 +14,5 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(planet.get_diameter(), "12240", "should 12240")
         self.assertEqual(planet.get_climate(), "temperate", "should temperate")
         self.assertEqual(planet.get_gravity(), "1 standard", "should 1 standard")
+        self.assertEqual(planet.get_terrain(), "cityscape, mountains", "should cityscape, mountains")
+
