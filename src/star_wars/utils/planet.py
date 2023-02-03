@@ -46,14 +46,19 @@ class Planet(BaseRequest):
 
     def get_rotation_period(self) -> str:
         """
-            Return a name of the rotation period in planet
+            Return a  rotation period in planet of planet
             :return: Name
             :type: :obj: `str`
         """
         return self.json_data.get("rotation_period")
+    def get_orbital_period(self) -> str:
+        """
+            Return a  rotation orbital period of planet
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("orbital_period")
 
 if __name__ == "__main__":
     planet = Planet(9)
-    print(planet.get_planet_json())
-    print(planet.get_name())
-    print(planet.get_rotation_period())
+    print(planet.get_orbital_period())
