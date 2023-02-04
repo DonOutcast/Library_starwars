@@ -58,7 +58,7 @@ jobs:
       - name: Test people
         run: python -m unittest src/tests_star/test_people.py
   windows:
-    needs: ubuntu
+    needs: mac-os
     runs-on: ${{ matrix.os }}
     strategy:
       matrix:
@@ -73,7 +73,7 @@ jobs:
       - name: Install deps
         run: |
           python -m pip install --upgrade pip
-          if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
+          if  -f requirements.txt  then pip install -r requirements.txt
       #      - name: Test all
       #        run: python -m unittest src/tests_star/test_star_wars.py
       - name: Test planet

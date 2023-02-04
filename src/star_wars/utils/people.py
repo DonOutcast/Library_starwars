@@ -183,12 +183,18 @@ class People(BaseRequest):
 
     def get_description(self) -> list[Any]:
         """
-        The function search
-        :return:
+        The function get description about the people
+        :return: Description
+        :type: :obj: `list[Any]`
         """
         return self.__history.get_description()
 
-    def get_after_photo(self) -> list[Any]:
+    def get_history_description(self) -> list[Any]:
+        """
+        The function get a history at block history
+        :return: A history of the people
+        :type: :obj: `lis[str]`
+        """
         return self.__history.get_after_photo()
 
     def get_photos_of_history(self) -> list:

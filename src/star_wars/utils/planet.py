@@ -152,7 +152,21 @@ class Planet(BaseRequest):
         :rtype: bool
         """
         return self.__history.save_image(path_to_image)
+    def get_description(self) -> list[Any]:
+        """
+        The function get description about the planet
+        :return: Description
+        :type: :obj: `list[Any]`
+        """
+        return self.__history.get_description()
+
+    def get_history_description(self) -> list[Any]:
+        """
+        The function get a history at block history
+        :return: A history of the planet
+        :type: :obj: `lis[str]`
+        """
+        return self.__history.get_after_photo()
 
 if __name__ == "__main__":
     planet = Planet(9)
-    print(planet.get_films())
