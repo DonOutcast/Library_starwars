@@ -185,4 +185,4 @@ class Planet(BaseRequest):
 
 if __name__ == "__main__":
     planet = Planet(9)
-    print(len(planet.get_photos_of_history()))
+    print(planet.get_description())
