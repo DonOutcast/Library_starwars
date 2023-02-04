@@ -3,7 +3,6 @@ try:
     import json
     import os.path
     import requests
-    from lxml import etree
     from typing import List, Any
     from bs4 import BeautifulSoup
     from src.star_wars.settings import Config
