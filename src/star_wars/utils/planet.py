@@ -167,6 +167,22 @@ class Planet(BaseRequest):
         :type: :obj: `lis[str]`
         """
         return self.__history.get_after_photo()
+    def get_photos_of_history(self) -> list:
+        """
+        Return all photos at history planet in url path
+        :return: Url paths
+        :type: :obj: `list`
+        """
+        return self.__history.get_photos_of_history()
+
+    def save_history_photos(self, path="") -> list[bool]:
+        """
+        The function save all photos at block history
+        :return: None
+        :type: :obj: `None`
+        """
+        return self.__history.save_history_photos(path)
 
 if __name__ == "__main__":
     planet = Planet(9)
+    print(len(planet.get_photos_of_history()))
