@@ -1,7 +1,7 @@
 import unittest
 from src.star_wars.utils.people import People
 from src.star_wars.utils.specie import Specie
-from src.star_wars.models.history import History
+
 from src.star_wars.models.starwars import StarWars
 from src.star_wars.utils.starships import Starship
 

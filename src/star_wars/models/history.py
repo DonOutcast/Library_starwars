@@ -106,3 +106,30 @@ class History:
         """
         self._generation_byte_code_photos()
         return self.byte_code_of_photos
+
+
+    def get_url_image(self) -> str:
+        result = self.soup.find("div", class_="image-wrapper").find("img").get("data-src")
+        return result
+
+    def save_image(self, path_to_image = "") -> bool:
+        """Save the image to your directory
+        :param person_name: The file location and name
+        :type person_name: str
+        :param path_to_image: A file link to
+        :type path_to_image: str
+        :returns: If the file saved successfully True else False
+        :rtype: bool
+        """
+        try:
+            with open(path_to_image + self.name_for_searching + ".png", "wb") as f:
+                f.write(requests.get(self.get_url_image()).content)
+        except Exception as error:
+            print(error)
+            return False
+        else:
+            return True
+
+if __name__ == "__main__":
+    history = History("Kamino")
+    print(history.get_url_image())

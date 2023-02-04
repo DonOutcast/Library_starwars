@@ -23,3 +23,6 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(planet.get_date_edited(), "2014-12-20T20:58:18.432000Z", "should 2014-12-20T20:58:18.432000Z")
 
 
+
+if __name__ == "__main__":
+    unittest.main()

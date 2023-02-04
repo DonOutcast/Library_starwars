@@ -12,6 +12,7 @@ jobs:
     runs-on: ubuntu-20.04
     strategy:
       matrix:
+        os: [ubuntu-20.04]
         python-version: [ "3.9"]
     steps:
       - uses: actions/checkout@v3
@@ -23,6 +24,9 @@ jobs:
         run: | 
           python -m pip install --upgrade pip
           if [ -f requirements.txt ]; then pip install -r requirements.txt; fi
-      - name: Test orig
+#      - name: Test all
 #        run: python -m unittest src/tests_star/test_star_wars.py
+      - name: Test planet
         run: python -m unittest src/tests_star/test_planet.py
+      - name: Test history
+        run: python -m unittest src/tests_star/test_history.py
