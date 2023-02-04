@@ -18,7 +18,8 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(planet.get_surface_water(), "unknown", "should unknown")
         self.assertEqual(planet.get_population(), "1000000000000", "should 1000000000000")
         self.assertEqual(planet.get_residents(), ['Finis Valorum', 'Adi Gallia', 'Jocasta Nu'], "should ['Finis Valorum', 'Adi Gallia', 'Jocasta Nu']")
-
-
+        self.assertEqual(planet.get_films(), ['Return of the Jedi', 'The Phantom Menace', 'Attack of the Clones', 'Revenge of the Sith'], "should ['Return of the Jedi', 'The Phantom Menace', 'Attack of the Clones', 'Revenge of the Sith']")
+        self.assertEqual(planet.get_date_created(), "2014-12-10T11:54:13.921000Z", "should 2014-12-10T11:54:13.921000Z")
+        self.assertEqual(planet.get_date_edited(), "2014-12-20T20:58:18.432000Z", "should 2014-12-20T20:58:18.432000Z")
 
 

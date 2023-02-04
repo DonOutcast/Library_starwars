@@ -157,9 +157,3 @@ class Specie(BaseRequest):
         """
         films_names = self._get_items_of_json("species", "title", Config.get_url_api() + Config.get_films())
         return films_names
-
-
-if __name__ == "__main__":
-    temp = Specie(2)
-    print(temp.get_people())
-    # print(temp.get_films())

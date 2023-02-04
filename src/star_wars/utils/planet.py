@@ -125,7 +125,22 @@ class Planet(BaseRequest):
         films_names = self._get_items_of_json("planets", "title", Config.get_url_api() + Config.get_films())
         return films_names
 
+    def get_date_created(self) -> str:
+        """
+        Return a date for created the planet
+        :return: Date
+        :type: :obj: `str`
+        """
+        return self.json_data.get("created")
+
+    def get_date_edited(self) -> str:
+        """
+        Return a date for edited the planet
+        :return: Date
+        :type: :obj: `str`
+        """
+        return self.json_data.get("edited")
+
 if __name__ == "__main__":
     planet = Planet(9)
-    print(planet.get_residents())
-    # print(planet.get_films())
+    print(planet.get_films())
