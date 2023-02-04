@@ -14,7 +14,7 @@ class StarWarsTest(unittest.TestCase):
                          [True, True, True, True, True, True, True, True, True, True, True, True, True, True],
                          "should [True, True, True, True, True, True, True, True, True, True, True, True, True, True]")
         self.assertEqual(len(history.get_byte_code_of_photos()), 14, "should 14")
-        self.assertEqual(history.get_url_image() , "https://lumiere-a.akamaihd.net/v1/images/kamino-main_3001369e.jpeg?region=158%2C0%2C964%2C542&width=320", "should https://lumiere-a.akamaihd.net/v1/images/kamino-main_3001369e.jpeg?region=158%2C0%2C964%2C542&width=320")
+        self.assertEqual(history.get_url_image() , "https://lumiere-a.akamaihd.net/v1/images/leia-organa-feature-image_d0f5e9_056d9177.jpeg?region=0%2C0%2C1280%2C720&width=320", "should https://lumiere-a.akamaihd.net/v1/images/leia-organa-feature-image_d0f5e9_056d9177.jpeg?region=0%2C0%2C1280%2C720&width=320")
         self.assertEqual(history.save_image(), True, "should True")
 
 

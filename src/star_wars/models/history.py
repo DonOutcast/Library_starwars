@@ -131,5 +131,5 @@ class History:
             return True
 
 if __name__ == "__main__":
-    history = History("Kamino")
+    history = History("Leia Organa")
     print(history.get_url_image())
