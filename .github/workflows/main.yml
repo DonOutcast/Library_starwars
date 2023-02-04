@@ -30,6 +30,8 @@ jobs:
         run: python -m unittest src/tests_star/test_planet.py
       - name: Test history
         run: python -m unittest src/tests_star/test_history.py
+      - name: Test people
+        run: python -m unittest src/tests_star/test_people.py
   mac-os:
     needs: ubuntu
     runs-on: ${{ matrix.os }}
@@ -53,3 +55,5 @@ jobs:
         run: python -m unittest src/tests_star/test_planet.py
       - name: Test history
         run: python -m unittest src/tests_star/test_history.py
+      - name: Test people
+        run: python -m unittest src/tests_star/test_people.py

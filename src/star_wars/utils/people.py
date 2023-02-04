@@ -170,31 +170,16 @@ class People(BaseRequest):
             home = requests.get(self.json_data.get("homeworld")).json().get("name")
         return home
 
-    @staticmethod
-    def get_url_image(url_person: str) -> str:
-        new_url = Config.get_url_star_wars() + url_person.replace(' ', '-')
-        response = requests.get(new_url)
-        soup = BeautifulSoup(response.content, "html.parser")
-        result = soup.find("div", class_="image-wrapper").find("img").get("data-src")
-        return result
 
-    def save_image(self, person_name: str, path_to_image) -> bool:
+    def save_image(self, path_to_image="") -> bool:
         """Save the image to your directory
-        :param person_name: The file location and name
-        :type person_name: str
         :param path_to_image: A file link to
         :type path_to_image: str
         :returns: If the file saved successfully True else False
         :rtype: bool
         """
-        try:
-            with open(person_name + ".png", "wb") as f:
-                f.write(requests.get(path_to_image).content)
-        except Exception as error:
-            print(error)
-            return False
-        else:
-            return True
+        return self.__history.save_image(path_to_image)
+
 
     def get_description(self) -> list[Any]:
         """
