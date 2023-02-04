@@ -7,6 +7,7 @@ try:
     from typing import List, Any
     from bs4 import BeautifulSoup
     from src.star_wars.settings import Config
+    from src.star_wars.models.history import History
     from src.star_wars.utils.baserequest import BaseRequest
 except (Exception,) as e:
     print(sys.exc_info())
@@ -29,6 +30,8 @@ class Planet(BaseRequest):
     def __init__(self, id_planet):
         super(Planet, self).__init__(id_planet, Config.get_url_api() + Config.get_planets())
         self.id = id_planet
+        self.photos_of_history = []
+        self.__history = History(self.get_name())
 
     def get_planet_json(self) -> str:
         """ Return all information about a planet
@@ -141,7 +144,14 @@ class Planet(BaseRequest):
         """
         return self.json_data.get("edited")
 
-
+    def save_image(self, path_to_image="") -> bool:
+        """Save the image to your directory
+        :param path_to_image: A file link to
+        :type path_to_image: str
+        :returns: If the file saved successfully True else False
+        :rtype: bool
+        """
+        return self.__history.save_image(path_to_image)
 
 if __name__ == "__main__":
     planet = Planet(9)
