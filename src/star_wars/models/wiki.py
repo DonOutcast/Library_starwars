@@ -19,7 +19,6 @@ class Wiki:
         self.name_for_searching = self.replace_name(name_for_searching)
         self.url_path = Config.get_url_wiki()
 
-
     @staticmethod
     def replace_name(name) -> str:
         """
@@ -83,16 +82,18 @@ class Wiki:
                 break
         self.image_path = result
         return result
-    def download_image(self, path_photo: str = "") -> bool:
+
+    def download_image(self, path_photo="") -> dict[str:bool]:
         """ The function save  image on your machine
             :param path_photo: Name and path to save
-            :type path_photo: `obj` str
+            :type path_photo: `obj` dict[str:bool]
         """
         self.get_photo_wiki()
+        path_photo += self.name_for_searching + ".png"
         if BaseRequest._check_status_code(self.image_path):
             with open(path_photo, 'wb') as file:
                 file.write(requests.get(self.image_path).content)
-            return os.path.exists(path_photo)
+            return {path_photo: os.path.exists(path_photo)}
 
 
 if __name__ == "__main__":

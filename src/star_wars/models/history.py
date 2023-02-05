@@ -132,6 +132,3 @@ class History:
         else:
             return True
 
-if __name__ == "__main__":
-    history = History("Leia Organa")
-    print(history.save_history_photos())

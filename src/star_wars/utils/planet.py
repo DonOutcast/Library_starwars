@@ -182,7 +182,5 @@ class Planet(BaseRequest):
         """
         return self.__history.save_history_photos(path)
 
-if __name__ == "__main__":
-    planet = Planet(9)
-    print(planet.save_history_photos())
+
 

@@ -6,6 +6,7 @@ try:
     from typing import List, Any
     from bs4 import BeautifulSoup
     from src.star_wars.settings import Config
+    from src.star_wars.models.wiki import Wiki
     from src.star_wars.models.history import History
     from src.star_wars.utils.baserequest import BaseRequest
 except (Exception,) as e:
@@ -31,6 +32,7 @@ class Specie(BaseRequest):
     def __init__(self, id_specie):
         super(Specie, self).__init__(id_specie, Config.get_url_api() + Config.get_species())
         self.id = id_specie
+        self.__wiki = Wiki(self.get_name())
 
     def get_specie_json(self) -> str:
         """ Return all information about a specie
@@ -156,3 +158,10 @@ class Specie(BaseRequest):
         """
         films_names = self._get_items_of_json("species", "title", Config.get_url_api() + Config.get_films())
         return films_names
+
+    def save_image(self):
+        return self.__wiki.download_image()
+
+if __name__ == "__main__":
+    specie = Specie(2)
+    print(specie.save_image())
