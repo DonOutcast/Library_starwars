@@ -141,6 +141,21 @@ class Vehicles(BaseRequest):
         """
         return self._search_items("pilots", "name")
 
+    def get_date_created(self) -> str:
+        """
+        Return a date for created
+        :return: Date
+        :type: :obj: `str`
+        """
+        return self.json_data.get("created")
+
+    def get_date_edited(self):
+        """
+        Return a date for edited
+        :return: Date
+        :type: :obj: `str`
+        """
+        return self.json_data.get("edited")
 
 
 

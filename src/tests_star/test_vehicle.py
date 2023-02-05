@@ -18,6 +18,7 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(vehicle.get_cargo_capacity(), "10", "should 10")
         self.assertEqual(vehicle.get_consumables(), "none", "should none")
         self.assertEqual(vehicle.get_vehicle_class(), "airspeeder", "should airspeeder")
-
+        self.assertEqual(vehicle.get_date_edited(), "2014-12-20T21:30:21.672000Z", "should 2014-12-20T21:30:21.672000Z")
+        self.assertEqual(vehicle.get_date_created(), "2014-12-15T12:22:12Z", "should 2014-12-15T12:22:12Z")
 if __name__ == "__main__":
     unittest.main()
