@@ -14,6 +14,7 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(vehicle.get_length(), "4.5", "should 4.5")
         self.assertEqual(vehicle.get_max_atmosphering_speed(), "650", "should 650")
         self.assertEqual(vehicle.get_crew(), "2", "should 2")
+        self.assertEqual(vehicle.get_passengers(), "0", "should 0")
 
 if __name__ == "__main__":
     unittest.main()

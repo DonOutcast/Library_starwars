@@ -93,6 +93,13 @@ class Vehicles(BaseRequest):
             :type: :obj: `str`
         """
         return self.json_data.get("crew")
+    def get_passengers(self):
+        """
+            Return a name of the passengers
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("passengers")
 
     def get_films(self) -> list[str]:
         """
