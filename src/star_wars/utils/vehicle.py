@@ -38,6 +38,23 @@ class Vehicles(BaseRequest):
     def get_vehicle_json(self):
 
         return self.json_data
+
+    def get_name(self):
+        """
+            Return a name of the vehicle
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("name")
+
+    def get_model(self):
+        """
+            Return a name of the model
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("model")
+
     def get_films(self) -> list[str]:
         """
         The function get all characters in the films
@@ -52,7 +69,6 @@ class Vehicles(BaseRequest):
         :return: Names characters
         :type: :obj: `str`
         """
-        # return self._get_items_of_json("vehicles", "name", Config.get_url_api() + Config.get_people())
         return self._search_items("pilots", "name")
 
 
@@ -60,6 +76,5 @@ class Vehicles(BaseRequest):
 
 if __name__ == "__main__":
     vehicles = Vehicles(14)
-    print(vehicles.get_films())
-    print(vehicles.get_pilots())
+
 
