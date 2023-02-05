@@ -86,6 +86,14 @@ class Vehicles(BaseRequest):
         """
         return self.json_data.get("max_atmosphering_speed")
 
+    def get_crew(self):
+        """
+            Return a name of the crew
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("crew")
+
     def get_films(self) -> list[str]:
         """
         The function get all characters in the films
