@@ -159,9 +159,22 @@ class Specie(BaseRequest):
         films_names = self._get_items_of_json("species", "title", Config.get_url_api() + Config.get_films())
         return films_names
 
-    def save_image(self):
-        return self.__wiki.download_image()
+    def save_image(self, path_photo="") -> dict[str:bool]:
+        """
+        The function save image on your machine
+        :param path_photo: Path to save default = ""
+        :return: Name photo and True is photo saved else False
+        :type: :obj: `dic[str:bool]`
+        """
+        return self.__wiki.download_image(path_photo)
+    def get_description(self) -> str:
+        """
+        The function get your description about the specie
+        :return: Description
+        :type: :obj: `str`
+        """
+        return  self.__wiki.get_descriptions()
 
 if __name__ == "__main__":
     specie = Specie(2)
-    print(specie.save_image())
+    print(specie.get_description())

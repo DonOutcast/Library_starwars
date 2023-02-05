@@ -48,6 +48,10 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(specie.get_people(), ['C-3PO', 'R2-D2', 'R5-D4', 'IG-88'],
                          "should ['C-3PO', 'R2-D2', 'R5-D4', 'IG-88']")
         self.assertEqual(specie.save_image(), {'Droid.png': True}, "should {'Droid.png': True}")
+        self.assertEqual(specie.get_description(),
+                         "Droids, less commonly known as robots and automatons, were mechanical beings that possessed artificial intelligence. They were used in a variety of roles and environments, often those considered too menial or too dangerous for other species, but also in fields that required extensive specialization and knowledge.",
+                         "should Droids, less commonly known as robots and automatons, were mechanical beings that possessed artificial intelligence. They were used in a variety of roles and environments, often those considered too menial or too dangerous for other species, but also in fields that required extensive specialization and knowledge.")
+
 
 if __name__ == "__main__":
     unittest.main()
