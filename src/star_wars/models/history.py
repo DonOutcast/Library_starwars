@@ -74,16 +74,19 @@ class History:
         """
         count = 0
         result = []
+        test_dict = {}
         for i in self.get_photos_of_history():
             path_photo = path + self.name_for_searching + str(count) + ".png"
             try:
                 with open(path_photo, "wb") as f:
                     f.write(requests.get(i).content)
                     result.append(os.path.exists(path_photo))
+                    test_dict[path_photo] = os.path.exists(path_photo)
             except Exception as error:
                 print(error)
             count += 1
-        return result
+        # return result
+        return test_dict
 
     def _generation_byte_code_photos(self) -> None:
         """
@@ -131,4 +134,4 @@ class History:
 
 if __name__ == "__main__":
     history = History("Leia Organa")
-    print(history.get_url_image())
+    print(history.save_history_photos())

@@ -40,7 +40,8 @@ class StarWarsTest(unittest.TestCase):
                          "should Coruscant is the vibrant heart and capital of the galaxy during the age of the Empire, featuring a diverse mix of cultures and citizens spread over hundreds of levels. Once the home of the main Jedi Temple -- the central hub of Jedi training and learning for over a thousand generations and the repository of the Jedi Archives -- these traditions ended when the planet bore witness to Order 66.")
         self.assertEqual(len(planet.get_history_description()), 12, "should 12")
         self.assertEqual(len(planet.get_photos_of_history()), 10, "should 10")
-
+        self.assertEqual(planet.save_history_photos(), {'Coruscant0.png': True, 'Coruscant1.png': True, 'Coruscant2.png': True, 'Coruscant3.png': True, 'Coruscant4.png': True, 'Coruscant5.png': True, 'Coruscant6.png': True, 'Coruscant7.png': True, 'Coruscant8.png': True, 'Coruscant9.png': True}
+                         ,"should {'Coruscant0.png': True, 'Coruscant1.png': True, 'Coruscant2.png': True, 'Coruscant3.png': True, 'Coruscant4.png': True, 'Coruscant5.png': True, 'Coruscant6.png': True, 'Coruscant7.png': True, 'Coruscant8.png': True, 'Coruscant9.png': True}")
 
 if __name__ == "__main__":
     unittest.main()
