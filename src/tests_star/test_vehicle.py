@@ -9,5 +9,6 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(vehicle.get_pilots(), ['Luke Skywalker', 'Wedge Antilles'], "should ['Luke Skywalker', 'Wedge Antilles']")
         self.assertEqual(vehicle.get_name(), "Snowspeeder", "should Snowspeeder")
         self.assertEqual(vehicle.get_model(), "t-47 airspeeder", "should t-47 airspeeder")
+        self.assertEqual(vehicle.get_manufacturer(), "Incom corporation", "should Incom corporation")
 if __name__ == "__main__":
     unittest.main()

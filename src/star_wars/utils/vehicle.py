@@ -55,6 +55,14 @@ class Vehicles(BaseRequest):
         """
         return self.json_data.get("model")
 
+    def get_manufacturer(self):
+        """
+            Return a name of the manufacturer
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("manufacturer")
+
     def get_films(self) -> list[str]:
         """
         The function get all characters in the films
