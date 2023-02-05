@@ -96,3 +96,11 @@ class BaseRequest:
         """
         self._all_pages(self.url_path)
         return self.all_jsons
+
+    def _search_items(self, key_one, key_two):
+        my_list = []
+        for url_i in self.json_data.get(key_one):
+            if self._check_status_code(url_i):
+                my_response = requests.get(url_i).json()
+                my_list.append(my_response.get(key_two))
+        return my_list

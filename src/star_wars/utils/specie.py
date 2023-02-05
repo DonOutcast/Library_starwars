@@ -175,6 +175,3 @@ class Specie(BaseRequest):
         """
         return  self.__wiki.get_descriptions()
 
-if __name__ == "__main__":
-    specie = Specie(2)
-    print(specie.get_description())
