@@ -109,6 +109,14 @@ class Vehicles(BaseRequest):
         """
         return self.json_data.get("cargo_capacity")
 
+    def get_consumables(self):
+        """
+            Return a name of the cargo_capacity
+            :return: Name
+            :type: :obj: `str`
+        """
+        return self.json_data.get("consumables")
+
     def get_films(self) -> list[str]:
         """
         The function get all characters in the films
