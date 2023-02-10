@@ -3,7 +3,6 @@ try:
     import json
     import requests
     from typing import List, Any
-    from src.star_wars.utils_1 import query
     from src.star_wars.exceptions import ResourceDoesNotExists
 except (Exception,) as e:
     print(sys.exc_info())
@@ -21,11 +20,18 @@ class BaseRequest:
     """
 
     def __init__(self, id_search: int, url_path: str) -> None:
-        response_json = query("{0}/{1}".format(url_path, id_search))
+        response_json = self.__query("{0}/{1}".format(url_path, id_search))
         self.json_data = response_json.json()
         self.url_path = url_path
         self.all_jsons = []
         # self.all_pages(url_path)
+
+    def __query(self, query):
+        headers = {'User-Agent': 'swapi-python'}
+        response = requests.get(query, headers=headers)
+        if response.status_code != 200:
+            raise ResourceDoesNotExists
+        return response
 
     @staticmethod
     def _check_status_code(url_path):
@@ -60,7 +66,7 @@ class BaseRequest:
                 raise ResourceDoesNotExists
             json_data = json.loads(my_response.content)
             for resource in json_data["results"]:
-                if not isinstance(resource.get(key_class), list) :
+                if not isinstance(resource.get(key_class), list):
                     if resource.get(key_class).split("/")[-2] == str(self.id):
                         names.append(resource.get(key_tag))
                 else:

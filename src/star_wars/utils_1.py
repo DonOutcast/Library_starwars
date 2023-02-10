@@ -8,12 +8,6 @@ except (Exception,):
     print(sys.exc_info())
 
 
-def query(query):
-    headers = {'User-Agent': 'swapi-python'}
-    response = requests.get(query, headers=headers)
-    if response.status_code != 200:
-        raise ResourceDoesNotExists
-    return response
 
 
 def all_resource_urls(query):
