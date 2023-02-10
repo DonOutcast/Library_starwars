@@ -33,7 +33,7 @@ class Vehicles(BaseRequest):
     def __init__(self, id_specie):
         super(Vehicles, self).__init__(id_specie, Config.get_url_api() + Config.get_vehicles())
         self.id = id_specie
-        # self.__wiki = Wiki(self.get_name())
+        self.__wiki = Wiki(self.get_name())
 
     def get_vehicle_json(self):
 
@@ -157,9 +157,15 @@ class Vehicles(BaseRequest):
         """
         return self.json_data.get("edited")
 
-
+    def get_descriptions(self) -> str:
+        """
+        This function get a description of the vehicle
+        :return: Description
+        :type: :obj: `str`
+        """
+        return self.__wiki.get_descriptions()
 
 if __name__ == "__main__":
     vehicles = Vehicles(14)
-
+    print(vehicles.get_descriptions())
 

@@ -27,7 +27,6 @@ class BaseRequest:
         self.all_jsons = []
         # self.all_pages(url_path)
 
-    # @staticmethod
     @staticmethod
     def _check_status_code(url_path):
         """
