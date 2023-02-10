@@ -165,7 +165,15 @@ class Vehicles(BaseRequest):
         """
         return self.__wiki.get_descriptions()
 
+    def download_image(self) -> dict[str: bool]:
+        """ The function save  image on your machine
+            :return: Path with True or False
+            :type: :obj: `dict[str:bool]`
+        """
+        return self.__wiki.download_image()
+
 if __name__ == "__main__":
     vehicles = Vehicles(14)
     print(vehicles.get_descriptions())
+    print(vehicles.download_image())
 

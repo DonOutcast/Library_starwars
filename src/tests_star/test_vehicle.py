@@ -24,7 +24,7 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(vehicle.get_descriptions(),
                          "The snowspeeder was a type of T-47 airspeeder manufactured by Incom Corporation and modified by the Rebel Alliance.[1] They saw use during the Battle of Hoth against the Galactic Empire, taking down Imperial All Terrain Armored Transports with their tow cables.[3]",
                          "should The snowspeeder was a type of T-47 airspeeder manufactured by Incom Corporation and modified by the Rebel Alliance.[1] They saw use during the Battle of Hoth against the Galactic Empire, taking down Imperial All Terrain Armored Transports with their tow cables.[3]")
-
+        self.assertEqual(vehicle.download_image(), {'Snowspeeder.png': True}, "should {'Snowspeeder.png': True}")
 
 if __name__ == "__main__":
     unittest.main()
