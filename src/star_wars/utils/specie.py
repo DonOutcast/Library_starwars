@@ -8,7 +8,7 @@ try:
     from src.star_wars.settings import Config
     from src.star_wars.models.wiki import Wiki
     from src.star_wars.models.history import History
-    from src.star_wars.utils.baserequest import BaseRequest
+    from star_wars.models.baserequest import BaseRequest
 except (Exception,) as e:
     print(sys.exc_info())
 

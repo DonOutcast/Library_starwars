@@ -9,7 +9,7 @@ try:
     from src.star_wars.models.wiki import Wiki
     from src.star_wars.utils.people import People
     from src.star_wars.models.history import History
-    from src.star_wars.utils.baserequest import BaseRequest
+    from star_wars.models.baserequest import BaseRequest
 except (Exception,) as e:
     print(sys.exc_info())
 
@@ -30,9 +30,9 @@ class Vehicles(BaseRequest):
             :type id_specie: :obj: `int`
         """
 
-    def __init__(self, id_specie):
-        super(Vehicles, self).__init__(id_specie, Config.get_url_api() + Config.get_vehicles())
-        self.id = id_specie
+    def __init__(self, id_vehicle):
+        super(Vehicles, self).__init__(id_vehicle, Config.get_url_api() + Config.get_vehicles())
+        self.id = id_vehicle
         self.__wiki = Wiki(self.get_name())
 
     def get_vehicle_json(self):
@@ -173,7 +173,8 @@ class Vehicles(BaseRequest):
         return self.__wiki.download_image()
 
 if __name__ == "__main__":
-    vehicles = Vehicles(14)
+    vehicles = Vehicles(4)
+    print(vehicles.get_name())
     print(vehicles.get_descriptions())
-    print(vehicles.download_image())
+    # print(vehicles.download_image())
 

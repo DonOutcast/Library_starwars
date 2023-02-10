@@ -7,7 +7,7 @@ try:
     from bs4 import BeautifulSoup
     from src.star_wars.settings import Config
     from src.star_wars.models.starwars import StarWars
-    from src.star_wars.utils.baserequest import BaseRequest
+    from star_wars.models.baserequest import BaseRequest
 except (Exception,) as e:
     print(sys.exc_info())
 
