@@ -6,7 +6,7 @@ try:
     import json
     from src.star_wars.settings import Config
     from src.star_wars.exceptions import ResourceDoesNotExists
-    from src.star_wars.utils_1 import query, all_resource_urls
+    from src.star_wars.utils_1 import all_resource_urls
 except (Exception,):
     print(sys.exc_info())
 

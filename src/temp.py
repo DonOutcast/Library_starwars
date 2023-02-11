@@ -11,8 +11,4 @@ if __name__ == "__main__":
     r_1 = requests.get("https://www.starwars.com/_grill/filter/films/star-wars-episode-iv-a-new-hope?filter=Characters&mod=6")
     r_2 = requests.get("https://www.starwars.com/_grill/filter/films/star-wars-episode-iv-a-new-hope?filter=Creatures&mod=6")
     temp = r_2.json()
-    print(temp)
-    # for i in temp["data"]:
-    #     if i["slug"] == "databank/boba-fett":
-    #         print(i)
-        # print(i["id"], i["slug"],  i["desktop_square_thumb"])
+

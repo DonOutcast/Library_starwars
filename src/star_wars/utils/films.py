@@ -56,7 +56,10 @@ class Films(BaseRequest):
 
 
 if __name__ == "__main__":
-    films = Films(3)
-    print(films.get_planets())
-
+    response = requests.get("https://www.starwars.com/films")
+    soup = BeautifulSoup(response.content, "html.parser")
+    print(soup.find("div", {"class": "blocks-container ref-1-5"}))
+    all_a = soup.find("div", {"class": "blocks-container ref-1-5"}).find_all("div", {"class": "aspect lazy-deferred lazy-load placeholder"})
+    # for i in all_a:
+    #     print(i.find("a")["href"])
 

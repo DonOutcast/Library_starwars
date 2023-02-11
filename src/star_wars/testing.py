@@ -2,7 +2,6 @@ import time
 
 try:
     import json
-    from src.star_wars.utils_1 import query
     from src.star_wars.settings import Config
     from accessify import protected
     import requests
