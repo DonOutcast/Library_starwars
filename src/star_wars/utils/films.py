@@ -60,6 +60,15 @@ class Film(BaseRequest):
         """
         return self.json_data.get("title")
 
+    def get_episode(self) -> str:
+        """
+        The function get a episode of film
+        :return: Episode of film
+        :type: :obj: `str`
+        """
+        return self.json_data.get("episode_id")
+
+
 
 if __name__ == "__main__":
    ...
