@@ -173,8 +173,8 @@ class Vehicle(BaseRequest):
         return self.__wiki.download_image()
 
 if __name__ == "__main__":
-    vehicles = Vehicle(4)
-    print(vehicles.get_name())
-    print(vehicles.get_descriptions())
+    vehicles = Vehicle(14)
+    print(vehicles.get_films())
+    print(vehicles.get_pilots())
     # print(vehicles.download_image())
 
