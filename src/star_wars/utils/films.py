@@ -31,7 +31,7 @@ class Film(BaseRequest):
         """
 
     def __init__(self, id_specie):
-        super(Films, self).__init__(id_specie, Config.get_url_api() + Config.get_films())
+        super(Film, self).__init__(id_specie, Config.get_url_api() + Config.get_films())
         self.id = id_specie
         # self.__wiki = Wiki(self.get_name())
 
@@ -52,7 +52,13 @@ class Film(BaseRequest):
 
         return self._get_items_of_json("films", "name", Config.get_url_api() + Config.get_planets())
 
-
+    def get_name(self) -> str:
+        """
+        The function get a name of film
+        :return: Name of film
+        :type: :obj: `str`
+        """
+        return self.json_data.get("title")
 
 
 if __name__ == "__main__":
