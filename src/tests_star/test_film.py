@@ -8,7 +8,7 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(film.get_name(), "A New Hope", "should A New Hope")
         self.assertEqual(film.get_episode(), 4, "should 4")
         self.assertEqual(len(film.get_opening_crawl()), 522, "should 522")
-        # self.assertEqual()
+        self.assertEqual(film.get_director(), "George Lucas", "should George Lucas")
         # self.assertEqual(len(film.get_characters()), 20, "should 20")
 
 

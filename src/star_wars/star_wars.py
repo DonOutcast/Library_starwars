@@ -15,4 +15,4 @@ if __name__ == "__main__":
     # starwars = StarWars()
     # print(starwars.get_films_names())
     test_films = Film(1)
-    print(len(test_films.get_opening_crawl()))
+    print(test_films.get_director())

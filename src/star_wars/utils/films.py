@@ -70,13 +70,16 @@ class Film(BaseRequest):
 
     def get_opening_crawl(self) -> str:
         """
-        The function get a opemimg crawl of film
+        The function get a opening crawl of film
         :return: Episode of film
         :type: :obj: `str`
         """
         return self.json_data.get("opening_crawl")
 
-
-
-if __name__ == "__main__":
-   ...
+    def get_director(self) -> str:
+        """
+        The function get a director of film
+        :return: Director of film
+        :type: :obj: `str`
+        """
+        return self.json_data.get("director")
