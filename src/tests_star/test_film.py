@@ -10,6 +10,7 @@ class StarWarsTest(unittest.TestCase):
         self.assertEqual(len(film.get_opening_crawl()), 522, "should 522")
         self.assertEqual(film.get_director(), "George Lucas", "should George Lucas")
         self.assertEqual(film.get_producer(), "Gary Kurtz, Rick McCallum", "should Gary Kurtz, Rick McCallum")
+        self.assertEqual(film.get_release_date(), "1977-05-25", "should 1977-05-25")
         # self.assertEqual(len(film.get_characters()), 20, "should 20")
 
 

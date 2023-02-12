@@ -92,3 +92,10 @@ class Film(BaseRequest):
         :type: :obj: `str`
         """
         return self.json_data.get("producer")
+    def get_release_date(self) -> str:
+        """
+        The function get a release date of film
+        :return: Director of film
+        :type: :obj: `str`
+        """
+        return self.json_data.get("release_date")
