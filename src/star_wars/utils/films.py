@@ -83,3 +83,12 @@ class Film(BaseRequest):
         :type: :obj: `str`
         """
         return self.json_data.get("director")
+
+
+    def get_producer(self) -> str:
+        """
+        The function get a producer of film
+        :return: Director of film
+        :type: :obj: `str`
+        """
+        return self.json_data.get("producer")
