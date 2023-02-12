@@ -35,22 +35,23 @@ class Film(BaseRequest):
         self.id = id_specie
         # self.__wiki = Wiki(self.get_name())
 
-    def get_characters(self) -> list[str]:
+    def get_characters(self) -> dict[str: int]:
         """
         The function get all characters in the films
         :return: Names characters
         :type: :obj: `str`
         """
-        return self._get_items_of_json("films", "name", Config.get_url_api() + Config.get_people())
-
+        # return self._get_items_of_json("films", "name", Config.get_url_api() + Config.get_people())
+        return self._search_items("characters", "name")
     def get_starships(self) -> list[str]:
         """
-        The function get all starshps in the films
+        The function get all starships in the films
         :return: Names characters
         :type: :obj: `str`
         """
         # return self._get_items_of_json("films", "name", Config.get_url_api() + Config.get_starships())
         return self._search_items("starships", "name")
+
     def get_vehicles(self) -> dict[str: int]:
         """
         The function get all vehicles in the films
