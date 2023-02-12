@@ -1,5 +1,5 @@
 import unittest
-from src.star_wars.utils.planet import Planet
+from src.star_wars.utils.planets import Planet
 
 
 class StarWarsTest(unittest.TestCase):

@@ -1,5 +1,5 @@
 import unittest
-from src.star_wars.utils.vehicle import Vehicles
+from src.star_wars.utils.vehicles import Vehicles
 
 
 class StarWarsTest(unittest.TestCase):

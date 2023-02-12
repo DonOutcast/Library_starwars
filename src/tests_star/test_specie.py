@@ -1,5 +1,5 @@
 import unittest
-from src.star_wars.utils.specie import Specie
+from src.star_wars.utils.species import Specie
 
 
 class StarWarsTest(unittest.TestCase):
