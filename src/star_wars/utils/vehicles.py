@@ -14,7 +14,7 @@ except (Exception,) as e:
     print(sys.exc_info())
 
 
-class Vehicles(BaseRequest):
+class Vehicle(BaseRequest):
     """
         Class for all specie in world Star Wars.
             Usage:
@@ -31,7 +31,7 @@ class Vehicles(BaseRequest):
         """
 
     def __init__(self, id_vehicle):
-        super(Vehicles, self).__init__(id_vehicle, Config.get_url_api() + Config.get_vehicles())
+        super(Vehicle, self).__init__(id_vehicle, Config.get_url_api() + Config.get_vehicles())
         self.id = id_vehicle
         self.__wiki = Wiki(self.get_name())
 
@@ -173,7 +173,7 @@ class Vehicles(BaseRequest):
         return self.__wiki.download_image()
 
 if __name__ == "__main__":
-    vehicles = Vehicles(4)
+    vehicles = Vehicle(4)
     print(vehicles.get_name())
     print(vehicles.get_descriptions())
     # print(vehicles.download_image())

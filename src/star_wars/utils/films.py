@@ -14,7 +14,7 @@ except (Exception,) as e:
     print(sys.exc_info())
 
 
-class Films(BaseRequest):
+class Film(BaseRequest):
     """
         Class for all specie in world Star Wars.
             Usage:
