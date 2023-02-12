@@ -15,4 +15,4 @@ if __name__ == "__main__":
     # starwars = StarWars()
     # print(starwars.get_films_names())
     test_films = Film(1)
-    print(type(test_films.get_release_date()))
+    print(test_films.get_planets())

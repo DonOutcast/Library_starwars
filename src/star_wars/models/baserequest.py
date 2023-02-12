@@ -102,10 +102,18 @@ class BaseRequest:
         self._all_pages(self.url_path)
         return self.all_jsons
 
-    def _search_items(self, key_one, key_two):
-        my_list = []
+    def _search_items(self, key_one, key_two) -> dict[str: int]:
+        """ Return all pilots of the starship
+            :param key_one: Word for search example  starships, films
+            :type key_one: :obj: `str`
+            :param key_two: Word for search in json example name, title
+            :type key_two: :obj: `str`
+            :return: Dictionary of names and ids
+            :type: dict[str: int]
+        """
+        my_dict = {}
         for url_i in self.json_data.get(key_one):
             if self._check_status_code(url_i):
                 my_response = requests.get(url_i).json()
-                my_list.append(my_response.get(key_two))
-        return my_list
+                my_dict[my_response.get(key_two)] = my_response.get("url").split("/")[-2]
+        return my_dict

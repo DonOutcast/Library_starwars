@@ -43,6 +43,29 @@ class Film(BaseRequest):
         """
         return self._get_items_of_json("films", "name", Config.get_url_api() + Config.get_people())
 
+    def get_starships(self) -> list[str]:
+        """
+        The function get all starshps in the films
+        :return: Names characters
+        :type: :obj: `str`
+        """
+        return self._get_items_of_json("films", "name", Config.get_url_api() + Config.get_starships())
+    def get_vehicles(self) -> list[str]:
+        """
+        The function get all vehicles in the films
+        :return: Names of vehicles
+        :type: :obj: `str`
+        """
+        return self._get_items_of_json("films", "name", Config.get_url_api() + Config.get_vehicles())
+
+    def get_species(self) -> list[str]:
+        """
+        The function get all vehicles in the films
+        :return: Names of species
+        :type: :obj: `str`
+        """
+        return self._get_items_of_json("films", "name", Config.get_url_api() + Config.get_species())
+
     def get_planets(self) -> list[str]:
         """
         The function get all characters in the planets
@@ -50,8 +73,8 @@ class Film(BaseRequest):
         :type: :obj: `str`
         """
 
-        return self._get_items_of_json("films", "name", Config.get_url_api() + Config.get_planets())
-
+        # return self._get_items_of_json("films", "name", Config.get_url_api() + Config.get_planets())
+        return self._search_items("planets", "name")
     def get_name(self) -> str:
         """
         The function get a name of film
@@ -84,7 +107,6 @@ class Film(BaseRequest):
         """
         return self.json_data.get("director")
 
-
     def get_producer(self) -> str:
         """
         The function get a producer of film
@@ -92,6 +114,7 @@ class Film(BaseRequest):
         :type: :obj: `str`
         """
         return self.json_data.get("producer")
+
     def get_release_date(self) -> str:
         """
         The function get a release date of film
