@@ -212,6 +212,5 @@ class People(BaseRequest):
         """
         return self.__history.save_history_photos(path)
 
-# if __name__ == "__main__":
-#     temp = People(2)
-# print(temp.save_image(temp.get_name(), temp.get_url_image(temp.get_name())))
+if __name__ == "__main__":
+    temp = People(2)

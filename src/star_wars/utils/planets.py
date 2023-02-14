@@ -183,4 +183,3 @@ class Planet(BaseRequest):
         return self.__history.save_history_photos(path)
 
 
-
